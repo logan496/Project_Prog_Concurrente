@@ -1,4 +1,4 @@
-# Install script for directory: /home/wolverine/CLionProjects/Projet_Programmation_Syteme
+# Install script for directory: /home/wolverine/CLionProjects/Projet_Programmation_Syteme/Project_Prog_Concurrente
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/wolverine/CLionProjects/Projet_Programmation_Syteme/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/wolverine/CLionProjects/Projet_Programmation_Syteme/Project_Prog_Concurrente/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

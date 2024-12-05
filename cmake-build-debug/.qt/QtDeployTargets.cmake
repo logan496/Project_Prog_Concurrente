@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_Projet_Programmation_Syteme_FILE /home/wolverine/CLionProjects/Projet_Programmation_Syteme/Project_Prog_Concurrente/cmake-build-debug/Projet_Programmation_Syteme)
+set(__QT_DEPLOY_TARGET_Projet_Programmation_Syteme_TYPE EXECUTABLE)

@@ -1,60 +1,58 @@
-cmake_minimum_required(VERSION 3.29)
-project(Projet_Programmation_Syteme)
+cmake_minimum_required(VERSION 3.16) # Qt nécessite au moins CMake 3.16, mais vérifiez si 3.29 est nécessaire pour d'autres raisons.
 
+project(Projet_Programmation_Syteme LANGUAGES CXX)
+
+# Utiliser le standard C++20
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(Projet_Programmation_Syteme main.cpp
-        src/Models/classDeclaration/ClientModel.h
-        src/Models/classDefinition/ClientModel.cpp
-        src/Models/classDefinition/Order.cpp
-        src/Models/classDeclaration/Order.h
-        src/Models/classDeclaration/Recipe.h
-        src/Models/classDefinition/Recipe.cpp
-        src/Models/classDefinition/Human.cpp
-        src/Models/classDeclaration/Human.h
-        src/Models/classDeclaration/UstensilModel.h
-        src/Models/classDefinition/UstensilModel.cpp
-        src/Models/classDeclaration/Table.h
-        src/Models/classDeclaration/DinningRoom.h
-        src/Models/classDefinition/DinningRoom.cpp
-        src/Models/classDefinition/Table.cpp
-        src/Models/classDeclaration/Butler.h
-        src/Models/classDefinition/Butler.cpp
-        src/Models/classDeclaration/ClientGroupCreator.h
-        src/Models/classDefinition/ClientGroupCreator.cpp
-        src/Models/classDeclaration/RestaurantDiver.h
-        src/Models/classDefinition/RestaurantDiver.cpp
-        src/Models/classDeclaration/Server.h
-        src/Models/classDefinition/Server.cpp
-        src/Models/classDeclaration/RoomClerk.h
-        src/Models/classDefinition/RoomClerk.cpp
-        src/Models/classDeclaration/CardModel.h
-        src/Models/classDefinition/CardModel.cpp
-        src/Models/classDeclaration/Chief.h
-        src/Models/classDefinition/Chief.cpp
-        src/Models/classDeclaration/Cook.h
-        src/Models/classDefinition/Cook.cpp
-        src/Models/classDeclaration/StorageModel.h
-        src/Models/classDefinition/StorageModel.cpp
-        src/Models/classDeclaration/headWaiter.h
-        src/Models/classDefinition/HeadWaiter.cpp
-        src/Models/classDeclaration/KitchenCounter.h
-        src/Models/classDefinition/KitchenCounter.cpp
-        src/Models/classDeclaration/KitchenAssistant.h
-        src/Models/classDefinition/KitchenAssistant.cpp
-        src/Models/classDeclaration/DishwasherModel.h
-        src/Models/classDefinition/DishwasherModel.cpp
-        src/Models/classDeclaration/MaterialModel.h
-        src/Models/classDefinition/MaterialModel.cpp
-        src/Models/classDeclaration/WashingMachine.h
-        src/Models/classDefinition/WashingMachine.cpp
-        src/Models/classDeclaration/DirtyDishesStorage.h
-        src/Models/classDefinition/DirtyDishesStorage.cpp
-        src/Controllers/classDeclaration/MainController.h
-        src/Controllers/classDefinition/MainController.cpp
-        src/Controllers/classDeclaration/DBController.h
-        src/Controllers/classDefinition/DBController.cpp
-        src/Controllers/classDeclaration/MoveController.h
-        src/Controllers/classDefinition/MoveController.cpp
-        src/Controllers/classDeclaration/MotionlessElementController.h
-        src/Controllers/classDefinition/MotionlessElementController.cpp)
+# Set the prefix path to the Qt installation
+set(CMAKE_PREFIX_PATH "/home/wolverine/Qt/6.8.1")
+
+# Activer les fonctionnalités automatiques de Qt
+set(CMAKE_AUTOMOC ON) # Active la génération automatique de moc
+set(CMAKE_AUTOUIC ON) # (Optionnel) Active la gestion des fichiers UI
+set(CMAKE_AUTORCC ON) # (Optionnel) Active la gestion des fichiers QRC
+
+# Trouver les composants nécessaires de Qt6
+find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
+
+# Ajouter l'exécutable
+add_executable(Projet_Programmation_Syteme
+        main.cpp
+#        src/Controllers/classDefinition/MainController.cpp
+#        src/Controllers/classDeclaration/MainController.h
+#        src/Controllers/classDefinition/MoveController.cpp
+#        src/Models/DinningRoom/classDeclaration/ClientGroupCreator.h
+#        src/Models/DinningRoom/classDefinition/ClientGroupCreator.cpp
+#        src/Models/DinningRoom/classDeclaration/ClientModel.h
+#        src/Models/CommonClass/classDeclaration/Order.h
+        src/View/MainView.cpp
+        src/View/MainView.h
+        src/View/DinningRoom/ClassDeclaration/ServerView.h
+        src/View/DinningRoom/ClassDefinition/ServerView.cpp
+        src/Controllers/classDeclaration/ServerController.h
+        src/Controllers/classDefinition/ServerController.cpp
+        src/Models/DinningRoom/classDeclaration/Server.h
+        src/Models/DinningRoom/classDefinition/Server.cpp
+        src/Controllers/classDeclaration/ServerController.h
+        src/Controllers/classDefinition/ServerController.cpp
+        src/Models/CommonClass/classDefinition/Human.cpp
+        src/Models/CommonClass/classDeclaration/Human.h
+
+
+)
+
+# Inclure les répertoires d'en-têtes
+target_include_directories(Projet_Programmation_Syteme PRIVATE
+        src/Models
+        src/View
+        src/Controllers
+)
+
+# Lier les bibliothèques Qt nécessaires
+target_link_libraries(Projet_Programmation_Syteme PRIVATE
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+)
