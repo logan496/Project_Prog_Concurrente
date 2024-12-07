@@ -29,16 +29,17 @@ add_executable(Projet_Programmation_Syteme
 #        src/Models/CommonClass/classDeclaration/Order.h
         src/View/MainView.cpp
         src/View/MainView.h
-        src/View/DinningRoom/ClassDeclaration/ServerView.h
-        src/View/DinningRoom/ClassDefinition/ServerView.cpp
-        src/Controllers/classDeclaration/ServerController.h
-        src/Controllers/classDefinition/ServerController.cpp
-        src/Models/DinningRoom/classDeclaration/Server.h
-        src/Models/DinningRoom/classDefinition/Server.cpp
-        src/Controllers/classDeclaration/ServerController.h
-        src/Controllers/classDefinition/ServerController.cpp
-        src/Models/CommonClass/classDefinition/Human.cpp
-        src/Models/CommonClass/classDeclaration/Human.h
+#        src/View/DinningRoom/ClassDeclaration/ServerView.h
+#        src/View/DinningRoom/ClassDefinition/ServerView.cpp
+#        src/Models/DinningRoom/classDeclaration/Server.h
+#        src/Models/DinningRoom/classDefinition/Server.cpp
+        src/Observer/Observable.cpp
+        src/View/DinningRoom/ClassDeclaration/MobileElementView.h
+        src/View/DinningRoom/ClassDefinition/MobileElementView.cpp
+        src/Models/CommonClass/classDeclaration/MobilityModel.h
+        src/Models/CommonClass/classDefinition/MobilityModel.cpp
+        src/Controllers/classDeclaration/MoveController.h
+        src/Controllers/classDefinition/MoveController.cpp
 
 
 )

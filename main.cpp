@@ -1,12 +1,27 @@
 #include <QApplication>
 #include "MainView.h"
+#include "src/Controllers/classDeclaration/MoveController.h"
+#include "src/Models/CommonClass/classDeclaration/MobilityModel.h"
+#include "src/View/DinningRoom/ClassDeclaration/MobileElementView.h"
+
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
-    MainWindow main_window;
-    main_window.setWindowTitle("Main interface");
-    main_window.show();
+    // Création des objets nécessaires
+    MobilityModel mobilityModel;
+    MobileElementView view;
 
-    return app.exec();
+    // Création et liaison du contrôleur
+    MoveController moveController(&view, &mobilityModel);
+    moveController.moveElement(200, 200);
+
+    // Création de la fenêtre principale
+    MainWindow main_window(&view);
+
+
+    // Lancement de l'application
+    app.exec();
+
+    return 0;
 }

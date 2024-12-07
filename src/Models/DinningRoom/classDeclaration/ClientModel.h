@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "CommonClass/classDeclaration/Recipe.h"
-#include "CommonClass/classDeclaration/Human.h"
+#include "CommonClass/classDeclaration/MobileElement.h"
 #include "CommonClass/classDeclaration/Order.h"
 using namespace std;
 
@@ -18,7 +18,7 @@ using namespace std;
  * the clientModel class is used to create the different instance of the client,
  * they are the one with the different methods of the client
  */
-class ClientModel : Human{
+class ClientModel {
 public:
     /**
      *@brief constructor of the Client class
@@ -35,7 +35,7 @@ public:
      */
     ClientModel(double abscice, double intercept, const string &type, int id, bool has_odered,
                 int order_time_left, bool has_ordered_entree, bool has_ordered_main_course, bool has_ordered_dessert)
-        : Human(abscice, intercept),
+        : MobileElementView(abscice, intercept),
           type(type),
           id(id),
           hasOdered(has_odered),
