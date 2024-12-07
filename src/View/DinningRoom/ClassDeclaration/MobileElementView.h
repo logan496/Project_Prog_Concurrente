@@ -6,8 +6,6 @@
 #define MOBILEELEMENT_H
 
 #include <QGraphicsEllipseItem>
-#include <QBrush>
-#include <QPen>
 #include <QObject>
 #include <QTimer>
 #include <QPropertyAnimation>
@@ -21,7 +19,6 @@ public:
     explicit MobileElementView(QGraphicsEllipseItem *parent = nullptr);
 
     void update(const std::unordered_map<std::string, std::any>& data) override;
-    // void timerMovement();
 private:
     int x, y;
 

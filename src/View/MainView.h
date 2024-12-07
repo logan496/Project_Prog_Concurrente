@@ -20,7 +20,6 @@ private:
     QGraphicsView* view;
     QGraphicsScene* scene;
     MobileElementView *element_view_;
-    QTimer *timer;
 };
 
 #endif //MAINVIEW_H

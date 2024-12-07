@@ -1,69 +1,43 @@
-//
 // Created by wolverine on 12/6/24.
-//
 #include "../Models/CommonClass/classDeclaration/MobilityModel.h"
 
 #include <iostream>
-#include <ostream>
+#include <QTimer>
 
+MobilityModel::MobilityModel(QObject *parent)
+    : QObject(parent), abscice(10), ordered(10), deltaX(0), deltaY(0),
+      timer(new QTimer(this)) {}
 
-MobilityModel::MobilityModel(): abscice(10), ordered(10) {
-
+bool MobilityModel::isAtDestionAbscice(int targetX) const {
+    return abscice == targetX;
 }
 
-bool MobilityModel::isAtDestionAbscice(int delatX) const {
-    return abscice == delatX;
+bool MobilityModel::isAtDestinationIntercept(int targetY) const {
+    return ordered == targetY;
 }
 
-
-bool MobilityModel::isAtDestinationIntercept(int delatY) const {
-    return ordered == delatY;
-}
-
-
-
-// void MobilityModel::move(int deltaX, int deltaY) {
-//     //while (!isAtDestionAbscice(deltaX) && !isAtDestinationIntercept(deltaY)) {
-//         while (!isAtDestionAbscice(deltaX)) {
-//             if (abscice > deltaX) {
-//                 abscice -= 1;
-//                 notify({{"x", abscice}});
-//             } else if (abscice < deltaX) {
-//                 abscice += 1;
-//                 notify({{"x", abscice}});
-//             }else {
-//                 while (!isAtDestinationIntercept(deltaY)) {
-//                     if (ordered > deltaY) {
-//                         ordered -= 1;
-//                         notify({{"y", ordered}});
-//                     } else if (ordered < deltaY) {
-//                         ordered += 1;
-//                         notify({{"y", ordered}});
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// //}
-
-void MobilityModel::move(int deltaX, int deltaY) {
-    while (!isAtDestionAbscice(deltaX)) {
-        if (abscice > deltaX) {
-            abscice -= 1;
+void MobilityModel::updatePosition() {
+    connect(timer, &QTimer::timeout, [this]() {
+        if (abscice != deltaX) {
+            abscice += (deltaX > abscice ? 1 : -1);
             notify({{"x", abscice}});
-        } else if (abscice < deltaX) {
-            abscice += 1;
-            notify({{"x", abscice}});
-        }
-    }
-
-    while (!isAtDestinationIntercept(deltaY)) {
-        if (ordered > deltaY) {
-            ordered -= 1;
-            notify({{"y", ordered}});
-        } else if (ordered < deltaY) {
-            ordered += 1;
+        }else if(ordered != deltaY) {
+            ordered += (deltaY > ordered ? 1 : -1);
             notify({{"y", ordered}});
         }
+        if (isAtDestionAbscice(deltaX) && isAtDestinationIntercept(deltaY)) {
+            timer->stop();
+        }
+    });
+    timer->start(16); // 60 FPS
+}
+
+void MobilityModel::move(int delX, int delY) {
+    deltaX = delX;
+    deltaY = delY;
+    notify({{"x", abscice}, {"y", ordered}});
+    std::cout << "Moving to: " << deltaX << ", " << deltaY << std::endl;
+    if (!timer->isActive()) {
+        updatePosition();
     }
 }

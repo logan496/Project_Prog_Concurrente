@@ -5,23 +5,25 @@
 #ifndef MOBILITYMODEL_H
 #define MOBILITYMODEL_H
 #include "../../../Observer/Observable.h"
-
+#include <QObject>
+#include <QTimer>
 /**
  * @class MobilityModel
  */
-class MobilityModel : public Observable {
+class MobilityModel : public Observable, public QObject{
 public:
-    MobilityModel();
+    explicit MobilityModel(QObject *parent = nullptr);
 
     bool isAtDestionAbscice(int delatX) const;
     bool isAtDestinationIntercept(int delatY) const;
 
-    int getAbscice(){return abscice;};
-    int getOrdered(){return ordered;};
+    void updatePosition();
 
     void move(int deltaX, int deltaY);
 private:
     int abscice;
     int ordered;
+    int deltaX, deltaY;
+    QTimer *timer;
 };
 #endif //MOBILITYMODEL_H

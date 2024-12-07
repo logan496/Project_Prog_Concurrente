@@ -4,7 +4,7 @@
 //
 
 MoveController::MoveController(MobileElementView* view, MobilityModel* mobilityModel)
-    : mobilityModel(mobilityModel), view(view) {
+    : view(view), mobilityModel(mobilityModel) {
     if (!mobilityModel || !view) {
         std::cout << "Error: Null pointer passed to MoveController!" << std::endl;
         return;
