@@ -4,17 +4,16 @@
 
 #ifndef SERVERVIEW_H
 #define SERVERVIEW_H
-#include <QWidget>
 #include <QLabel>
-#include <queue>
 #include <QVBoxLayout>
+#include "../Observer/Observer.h"
 
-class ServerView : public QWidget {
+
+class ServerView : public Observer  {
 public:
-    explicit ServerView(QWidget *parent = nullptr);
 
-private:
-    QLabel *titleLabel{};
-    QVBoxLayout *layout_;
+    void update(const std::unordered_map<std::string, std::any>& data) override;
+    
 };
+
 #endif //SERVERVIEW_H

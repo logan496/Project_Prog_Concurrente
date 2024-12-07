@@ -5,6 +5,7 @@
 #ifndef MATERIALMODEL_H
 #define MATERIALMODEL_H
 #include <iostream>
+#include "../Observer/Observable.h"
 #include <utility>
 using namespace std;
 

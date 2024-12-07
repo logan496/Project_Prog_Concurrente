@@ -3,22 +3,21 @@
 //
 #include "MainView.h"
 
-#include <qlayout.h>
+MainWindow::MainWindow(MobileElementView *element_view) : element_view_(element_view) {
+    scene = new QGraphicsScene();
+    view = new QGraphicsView(scene);
+    view->setSceneRect(0, 0, 800, 600);
 
-MainWindow::MainWindow()
- {
-    setupUi();
+    scene->addItem(element_view);
+
+    view->show();
 }
 
-MainWindow::~MainWindow() = default;
 
-void MainWindow::setupUi() {
-    QWidget widget;
-    widget.setFixedSize(800, 600);
-
-    serverView = new ServerView(this, foko_queue);
-
-    serverView->setGeometry(0, 500, 800, 100);
+MainWindow::~MainWindow() {
+    delete view;
+    delete scene;
 }
+
 
 

@@ -4,26 +4,22 @@
 
 #ifndef MAINVIEW_H
 #define MAINVIEW_H
-#include <QMainWindow>
-#include <QWidget>
-#include <QLabel>
+#include <QGraphicsView>
 
-#include "../View/DinningRoom/ClassDeclaration/ServerView.h"
 
-class MainWindow : public QMainWindow {
-    Q_OBJECT
+#include <QGraphicsScene>
+
+#include "../View/DinningRoom/ClassDeclaration/MobileElementView.h"
+
+class MainWindow{
 public:
-    explicit MainWindow();
-    ~MainWindow() override;
+    explicit MainWindow(MobileElementView *element_view);
+    ~MainWindow();
 
-    ServerView* getServerView();
-
-    void setupUi();
-protected:
-    ServerView *serverView;
-    std::queue<int> foko_queue;
-    // importer ici les éléments de la vue
-
+private:
+    QGraphicsView* view;
+    QGraphicsScene* scene;
+    MobileElementView *element_view_;
 };
 
 #endif //MAINVIEW_H
