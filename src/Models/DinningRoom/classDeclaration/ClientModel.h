@@ -8,7 +8,7 @@
 #include <vector>
 #include "CommonClass/classDeclaration/Recipe.h"
 #include "CommonClass/classDeclaration/MobilityModel.h"
-#include "CommonClass/classDeclaration/Order.h"
+
 using namespace std;
 
 /**
@@ -64,7 +64,7 @@ public:
      * @brief client method eat
      * @param order
      */
-    void eat(vector<Order> &order);
+    // void eat(vector<Order> &order);
 
 private:
     string type;

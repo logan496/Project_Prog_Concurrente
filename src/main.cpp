@@ -1,26 +1,43 @@
-#include <QApplication>
-#include "MainView.h"
-#include "../Controllers/classDeclaration/MoveController.h"
-#include "../Models/CommonClass/classDeclaration/MobilityModel.h"
-#include "../View/DinningRoom/ClassDeclaration/MobileElementView.h"
+// #include <QApplication>
+// #include "MainView.h"
+// #include "../Controllers/classDeclaration/MoveController.h"
+// #include "../Models/CommonClass/classDeclaration/MobilityModel.h"
+// #include "../View/DinningRoom/ClassDeclaration/MobileElementView.h"
+#include "../Managers/classDeclaration/clientGroupManager.h"
+#include "../threadPool/ThreadPool.h"
+#include "../factories/DinningRoom/classDeclaration/ClientGroupFactory.h"
+#include "../Models/DinningRoom/classDeclaration/ClientGroup.h"
 
 int main(int argc, char **argv)
 {
-    QApplication app(argc, argv);
+    // QApplication app(argc, argv);
+    //
+    // // Création des objets nécessaires
+    // MobilityModel mobilityModel;
+    // MobileElementView view;
+    // // Création et liaison du contrôleur
+    // MoveController moveController(&view, &mobilityModel);
+    // moveController.moveElement(200, 200);
+    //
+    // // Création de la fenêtre principale
+    // MainWindow main_window(&view);
+    //
+    //
+    // // Lancement de l'application
+    // app.exec();
 
-    // Création des objets nécessaires
-    MobilityModel mobilityModel;
-    MobileElementView view;
-    // Création et liaison du contrôleur
-    MoveController moveController(&view, &mobilityModel);
-    moveController.moveElement(200, 200);
+    ThreadPool pool (8);
+    ClientGroupFactory factory;
+    ClientGroupCreator client_group_creator;
 
-    // Création de la fenêtre principale
-    MainWindow main_window(&view);
+    ClientGroupManager manager(factory, client_group_creator, pool);
 
+    size_t numberOfTasks = 30;
+    manager.start(numberOfTasks);
 
-    // Lancement de l'application
-    app.exec();
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+    manager.stop();
 
     return 0;
 

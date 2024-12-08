@@ -24,8 +24,8 @@ void ClientModel::toogleHasOrderedEntree() {
 }
 
 
-void ClientModel::eat(vector<Order> &order) {
-    /* TODO: add a methods eat for the client
-     * Manage the time by the type of dishes
-    */
-}
+// void ClientModel::eat(vector<Order> &order) {
+//     /* TODO: add a methods eat for the client
+//      * Manage the time by the type of dishes
+//     */
+// }

@@ -22,33 +22,34 @@ add_executable(Projet_Programmation_Syteme
         #        src/Controllers/classDefinition/MainController.cpp
         #        src/Controllers/classDeclaration/MainController.h
         #        src/Controllers/classDefinition/MoveController.cpp
-        #        src/Models/DinningRoom/classDeclaration/ClientGroupCreator.h
-        #        src/Models/DinningRoom/classDefinition/ClientGroupCreator.cpp
-        #        src/Models/DinningRoom/classDeclaration/ClientModel.h
-        #        src/Models/CommonClass/classDeclaration/Order.h
-        src/View/MainView.cpp
-        src/View/MainView.h
+        src/Models/DinningRoom/classDeclaration/ClientModel.h
+
+        #        src/View/MainView.cpp
+        #        src/View/MainView.h
         #        src/View/DinningRoom/ClassDeclaration/ServerView.h
         #        src/View/DinningRoom/ClassDefinition/ServerView.cpp
         #        src/Models/DinningRoom/classDeclaration/Server.h
         #        src/Models/DinningRoom/classDefinition/Server.cpp
 
-        src/Observer/Observable.cpp
-        src/View/DinningRoom/ClassDeclaration/MobileElementView.h
-        src/View/DinningRoom/ClassDefinition/MobileElementView.cpp
-        src/Models/CommonClass/classDeclaration/MobilityModel.h
-        src/Models/CommonClass/classDefinition/MobilityModel.cpp
-        src/Controllers/classDeclaration/MoveController.h
-        src/Controllers/classDefinition/MoveController.cpp
+        #        src/Observer/Observable.cpp
+        #        src/View/DinningRoom/ClassDeclaration/MobileElementView.h
+        #        src/View/DinningRoom/ClassDefinition/MobileElementView.cpp
+        #        src/Models/CommonClass/classDeclaration/MobilityModel.h
+        #        src/Models/CommonClass/classDefinition/MobilityModel.cpp
+        #        src/Controllers/classDeclaration/MoveController.h
+        #        src/Controllers/classDefinition/MoveController.cpp
         src/factories/DinningRoom/classDefinition/ClientGroupFactory.cpp
         src/factories/DinningRoom/classDeclaration/ClientGroupFactory.h
         src/threadPool/ThreadPool.cpp
         src/threadPool/ThreadPool.h
-        src/tes.cpp
+        #        src/tes.cpp
         src/manageConfig/readEnv/EnvReader.cpp
         src/manageConfig/readEnv/EnvReader.h
-        src/manageConfig/readJson/JsonReader.cpp
-        src/manageConfig/readJson/JsonReader.h
+        #        src/manageConfig/readJson/JsonReader.cpp
+        #        src/manageConfig/readJson/JsonReader.h
+        src/Managers/classDefinition/clientGroupManager.cpp
+        src/Managers/classDeclaration/clientGroupManager.h
+        src/Models/DinningRoom/classDeclaration/ClientGroup.h
 
 
 )
@@ -65,4 +66,7 @@ target_link_libraries(Projet_Programmation_Syteme PRIVATE
         Qt6::Core
         Qt6::Gui
         Qt6::Widgets
+        stdc++
 )
+
+

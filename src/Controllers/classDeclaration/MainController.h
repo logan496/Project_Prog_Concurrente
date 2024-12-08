@@ -8,6 +8,9 @@
 
 #include "DBController.h"
 #include "MotionlessElementController.h"
+#include "../factories/DinningRoom/classDeclaration/ClientGroupFactory.h"
+#include "../Models/DinningRoom/classDeclaration/ClientGroup.h"
+
 using namespace std;
 
 /**
