@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 3306
   },
-  "otherConfig": {
-
+  "path": {
+    "envPath": "/home/wolverine/CLionProjects/Projet_Programmation_Syteme/Project_Prog_Concurrente/src/.env"
   }
 }

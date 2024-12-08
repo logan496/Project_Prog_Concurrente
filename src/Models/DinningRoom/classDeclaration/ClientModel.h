@@ -22,9 +22,6 @@ class ClientModel {
 public:
     /**
      *@brief constructor of the Client class
-     *
-     * @param abscice the x position of the client he walks
-     * @param intercept the y position of the client when he walks
      * @param type the type of client (hurry, ...)
      * @param id the unique identifier of the client
      * @param has_odered to know if the client has ordered something
@@ -33,7 +30,7 @@ public:
      * @param has_ordered_main_course
      * @param has_ordered_dessert
      */
-    ClientModel(double abscice, double intercept, const string &type, int id, bool has_odered,
+    ClientModel(const string &type, int id, bool has_odered,
                 int order_time_left, bool has_ordered_entree, bool has_ordered_main_course, bool has_ordered_dessert)
         : type(type),
           id(id),

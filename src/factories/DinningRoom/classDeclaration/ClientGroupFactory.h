@@ -11,6 +11,7 @@
 #include "../Models/DinningRoom/classDeclaration/ClientGroup.h"
 #include "../Models/DinningRoom/classDeclaration/ClientModel.h"
 #include "../Models/CommonClass/classDeclaration/Recipe.h"
+#include "../manageConfig/readEnv/EnvReader.h"
 
 
 /**
@@ -28,7 +29,7 @@ public:
 
     std::string chooseClientType() const;
 
-    int setClientWaitTime(std::string client_type_);
+    int setClientWaitTime(const std::string &client_type_) const;
 
 
 
@@ -37,9 +38,6 @@ public:
 private:
     int clientIdCounter = 0;
     std::string clientType[] = {"cool_client", "hurry_client"};
-    bool has_ordered_entree = false;
-    bool has_ordered_main_course = false;
-    bool has_ordered_dessert = false;
     vector<Recipe> client_choices[];
     condition_variable client_created;
     mutex client_created_mutex;
