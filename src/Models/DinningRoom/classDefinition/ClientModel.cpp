@@ -29,4 +29,3 @@ void ClientModel::eat(vector<Order> &order) {
      * Manage the time by the type of dishes
     */
 }
-

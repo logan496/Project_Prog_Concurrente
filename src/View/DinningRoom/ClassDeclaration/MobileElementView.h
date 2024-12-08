@@ -16,7 +16,13 @@
  */
 class MobileElementView : public Observer, public QGraphicsEllipseItem, public QObject{
 public:
-    explicit MobileElementView(QGraphicsEllipseItem *parent = nullptr);
+    /**
+     * @brief MobileElementView constructor
+     * @param parent
+     * @param abscice
+     * @param ordered
+     */
+    explicit  MobileElementView(QGraphicsEllipseItem *parent = nullptr, int abscice=0, int ordered=0);
 
     void update(const std::unordered_map<std::string, std::any>& data) override;
 private:

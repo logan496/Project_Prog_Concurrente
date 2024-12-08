@@ -34,7 +34,8 @@ public:
      * @param second_square_request
      */
     DinningRoom(const vector<Table> &table_list, int bread_cart_available, int card_distribueted,
-                int current_client_number, int total_client_of_the_day, bool is_first_square_busy, bool is_second_square_busy,
+                int current_client_number, int total_client_of_the_day, bool is_first_square_busy,
+                bool is_second_square_busy,
                 int firt_square_busy_server_number, int second_square_busy_server_number,
                 const queue<Table> &first_square_request, const queue<Table> &second_square_request)
         : tableList(table_list),
@@ -62,7 +63,7 @@ public:
      * @brief getter for the tableList attribute
      * @return tableList
      */
-    vector<Table>  getTableList();
+    vector<Table> getTableList();
 
 private:
     vector<Table> tableList;
@@ -76,7 +77,6 @@ private:
     int secondSquareBusyServerNumber;
     queue<Table> firstSquareRequest;
     queue<Table> secondSquareRequest;
-
 };
 
 #endif //DINNINGROOM_H

@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "CommonClass/classDeclaration/Recipe.h"
-#include "CommonClass/classDeclaration/MobileElement.h"
+#include "CommonClass/classDeclaration/MobilityModel.h"
 #include "CommonClass/classDeclaration/Order.h"
 using namespace std;
 
@@ -23,20 +23,19 @@ public:
     /**
      *@brief constructor of the Client class
      *
-     * @param abscice
-     * @param intercept
-     * @param type
-     * @param id
-     * @param has_odered
-     * @param order_time_left
+     * @param abscice the x position of the client he walks
+     * @param intercept the y position of the client when he walks
+     * @param type the type of client (hurry, ...)
+     * @param id the unique identifier of the client
+     * @param has_odered to know if the client has ordered something
+     * @param order_time_left the time allowed to the client to make a choice on the card
      * @param has_ordered_entree
      * @param has_ordered_main_course
      * @param has_ordered_dessert
      */
     ClientModel(double abscice, double intercept, const string &type, int id, bool has_odered,
                 int order_time_left, bool has_ordered_entree, bool has_ordered_main_course, bool has_ordered_dessert)
-        : MobileElementView(abscice, intercept),
-          type(type),
+        : type(type),
           id(id),
           hasOdered(has_odered),
           orderTimeLeft(order_time_left),
@@ -44,6 +43,7 @@ public:
           hasOrderedMainCourse(has_ordered_main_course),
           hasOrderedDessert(has_ordered_dessert) {
     }
+
     /**
      * @brief this function is use for the client to make a choice
      *
@@ -57,11 +57,10 @@ public:
      */
     void toogleHasOrdered();
 
-    /**
-     * C
-     */
     void toogleHasOrderedMainCourse();
+
     void toogleHasOrderedDessert();
+
     void toogleHasOrderedEntree();
 
     /**
@@ -78,9 +77,8 @@ private:
     bool hasOrderedEntree;
     bool hasOrderedMainCourse;
     bool hasOrderedDessert;
-    vector<Recipe> choices;
+    vector<Recipe> choices; /** <contain the different choice of the client. */
 };
-
 
 
 #endif //CLIENTMODEL_H

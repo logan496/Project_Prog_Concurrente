@@ -11,28 +11,28 @@ set(CMAKE_PREFIX_PATH "/home/wolverine/Qt/6.8.1")
 
 # Activer les fonctionnalités automatiques de Qt
 set(CMAKE_AUTOMOC ON) # Active la génération automatique de moc
-set(CMAKE_AUTOUIC ON) # (Optionnel) Active la gestion des fichiers UI
-set(CMAKE_AUTORCC ON) # (Optionnel) Active la gestion des fichiers QRC
+
 
 # Trouver les composants nécessaires de Qt6
 find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
 
 # Ajouter l'exécutable
 add_executable(Projet_Programmation_Syteme
-        main.cpp
-#        src/Controllers/classDefinition/MainController.cpp
-#        src/Controllers/classDeclaration/MainController.h
-#        src/Controllers/classDefinition/MoveController.cpp
-#        src/Models/DinningRoom/classDeclaration/ClientGroupCreator.h
-#        src/Models/DinningRoom/classDefinition/ClientGroupCreator.cpp
-#        src/Models/DinningRoom/classDeclaration/ClientModel.h
-#        src/Models/CommonClass/classDeclaration/Order.h
+        src/main.cpp
+        #        src/Controllers/classDefinition/MainController.cpp
+        #        src/Controllers/classDeclaration/MainController.h
+        #        src/Controllers/classDefinition/MoveController.cpp
+        #        src/Models/DinningRoom/classDeclaration/ClientGroupCreator.h
+        #        src/Models/DinningRoom/classDefinition/ClientGroupCreator.cpp
+        #        src/Models/DinningRoom/classDeclaration/ClientModel.h
+        #        src/Models/CommonClass/classDeclaration/Order.h
         src/View/MainView.cpp
         src/View/MainView.h
-#        src/View/DinningRoom/ClassDeclaration/ServerView.h
-#        src/View/DinningRoom/ClassDefinition/ServerView.cpp
-#        src/Models/DinningRoom/classDeclaration/Server.h
-#        src/Models/DinningRoom/classDefinition/Server.cpp
+        #        src/View/DinningRoom/ClassDeclaration/ServerView.h
+        #        src/View/DinningRoom/ClassDefinition/ServerView.cpp
+        #        src/Models/DinningRoom/classDeclaration/Server.h
+        #        src/Models/DinningRoom/classDefinition/Server.cpp
+
         src/Observer/Observable.cpp
         src/View/DinningRoom/ClassDeclaration/MobileElementView.h
         src/View/DinningRoom/ClassDefinition/MobileElementView.cpp
@@ -40,6 +40,15 @@ add_executable(Projet_Programmation_Syteme
         src/Models/CommonClass/classDefinition/MobilityModel.cpp
         src/Controllers/classDeclaration/MoveController.h
         src/Controllers/classDefinition/MoveController.cpp
+        src/factories/DinningRoom/classDefinition/ClientGroupFactory.cpp
+        src/factories/DinningRoom/classDeclaration/ClientGroupFactory.h
+        src/threadPool/ThreadPool.cpp
+        src/threadPool/ThreadPool.h
+        src/tes.cpp
+        src/manageConfig/readEnv/EnvReader.cpp
+        src/manageConfig/readEnv/EnvReader.h
+        src/manageConfig/readJson/JsonReader.cpp
+        src/manageConfig/readJson/JsonReader.h
 
 
 )

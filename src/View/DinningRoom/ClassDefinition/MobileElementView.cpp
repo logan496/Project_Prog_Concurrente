@@ -11,7 +11,7 @@
 
 #include "MainView.h"
 
-MobileElementView::MobileElementView(QGraphicsEllipseItem *parent) : QGraphicsEllipseItem(parent) {
+MobileElementView::MobileElementView(QGraphicsEllipseItem *parent, int abscice, int ordered) : QGraphicsEllipseItem(parent), x(abscice), y(ordered) {
     drawElement();
 }
 

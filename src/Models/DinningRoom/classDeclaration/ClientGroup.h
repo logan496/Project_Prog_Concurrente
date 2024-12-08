@@ -28,12 +28,13 @@ public:
     }
 
     /**
-     * @brief the function that lay group of clients
+     * @brief to create group of client if they are alone no group is needed
+     * @param client_group this list contains the different clients object
      */
-    void createGroup();
+    void addClientGroup(const ClientModel &client_group) {clientGroups.push_back(client_group);}
 
 private:
     vector<ClientModel> clientGroups;
-    int clientNumber;
+    int clientNumber; /** the number of clients in the group */
 };
 #endif //CLIENTGROUPCREATOR_H
