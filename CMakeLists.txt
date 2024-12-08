@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.29)
 
 # Nom du projet
-project(Projet_Programmation_Syteme)
+project(Project_Prog_Concurrente)
 
 # Spécifier le standard C++ utilisé
 set(CMAKE_CXX_STANDARD 20)
@@ -14,12 +14,12 @@ set(CMAKE_PREFIX_PATH "C:/Qt/6.8.1/mingw_64")
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 # Ajouter la gestion des fichiers .ui (si vous en utilisez)
-qt6_wrap_ui(UI_HEADERS 
-    src/Views/MainWindow.ui
-)
+#qt6_wrap_ui(UI_HEADERS 
+    #src/Views/MainWindow.ui
+#)
 
 # Ajouter les fichiers sources
-add_executable(Projet_Programmation_Syteme 
+add_executable(Project_Prog_Concurrente
     main.cpp
 
     # Fichiers .ui convertis
@@ -89,6 +89,6 @@ add_executable(Projet_Programmation_Syteme
 )
 
 # Lier les bibliothèques Qt nécessaires
-target_link_libraries(Projet_Programmation_Syteme 
+target_link_libraries(Project_Prog_Concurrente
     Qt6::Widgets
 )

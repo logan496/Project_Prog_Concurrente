@@ -18,7 +18,7 @@
         {
             "label": "Run CMake",
             "type": "shell",
-            "command": "cmake",
+            "command": "C:/MinGW/bin/g++.exe",
             "args": [
                 "-S",
                 "${workspaceFolder}",

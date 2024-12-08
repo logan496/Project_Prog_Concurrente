@@ -155,10 +155,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "CXX compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "C:/ProgramData/mingw64/mingw64/bin/g++.exe"
 		},
 		{
@@ -299,10 +299,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "C compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "C:/ProgramData/mingw64/mingw64/bin/gcc.exe"
 		},
 		{
@@ -875,7 +875,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/Projet_Programmation_Syteme"
+			"value" : "C:/Program Files (x86)/Project_Prog_Concurrente"
 		},
 		{
 			"name" : "CMAKE_INSTALL_RUNSTATEDIR",
@@ -1171,7 +1171,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Projet_Programmation_Syteme"
+			"value" : "Project_Prog_Concurrente"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1602,7 +1602,7 @@
 			"value" : "1"
 		},
 		{
-			"name" : "Projet_Programmation_Syteme_BINARY_DIR",
+			"name" : "Project_Prog_Concurrente_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1614,7 +1614,7 @@
 			"value" : "C:/Users/Yvan/Desktop/Project_Prog_Concurrente/build"
 		},
 		{
-			"name" : "Projet_Programmation_Syteme_IS_TOP_LEVEL",
+			"name" : "Project_Prog_Concurrente_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1626,7 +1626,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Projet_Programmation_Syteme_SOURCE_DIR",
+			"name" : "Project_Prog_Concurrente_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -6427,7 +6427,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Projet_Programmation_Syteme"
+			"value" : "C:/Program Files (x86)/Project_Prog_Concurrente"
 		}
 	],
 	"kind" : "cache",

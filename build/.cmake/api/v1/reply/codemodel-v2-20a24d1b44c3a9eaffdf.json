@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "Projet_Programmation_Syteme",
+					"name" : "Project_Prog_Concurrente",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "Projet_Programmation_Syteme::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Projet_Programmation_Syteme-Debug-a76772cf47096eaa1598.json",
-					"name" : "Projet_Programmation_Syteme",
+					"id" : "Project_Prog_Concurrente::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Project_Prog_Concurrente-Debug-2b3a8a98bce170d0fcd6.json",
+					"name" : "Project_Prog_Concurrente",
 					"projectIndex" : 0
 				}
 			]
