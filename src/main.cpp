@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 
     ClientGroupManager manager(factory, client_group_creator, pool);
 
-    size_t numberOfTasks = 30;
+    size_t numberOfTasks = client_group_creator.returnRandomClientNumber();
     manager.start(numberOfTasks);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));

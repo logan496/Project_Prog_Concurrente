@@ -50,6 +50,10 @@ add_executable(Projet_Programmation_Syteme
         src/Managers/classDefinition/clientGroupManager.cpp
         src/Managers/classDeclaration/clientGroupManager.h
         src/Models/DinningRoom/classDeclaration/ClientGroup.h
+        src/factories/DinningRoom/classDeclaration/TableFactory.h
+        src/factories/DinningRoom/classDefinition/TableFactory.cpp
+        src/View/commonClass/ClassDeclaration/MotionLessElementView.h
+        src/Models/CommonClass/classDeclaration/MotionLessModel.h
 
 
 )

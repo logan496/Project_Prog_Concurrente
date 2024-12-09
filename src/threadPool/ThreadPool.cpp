@@ -4,7 +4,7 @@
 
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool(size_t num_threads) {
+ThreadPool::ThreadPool(const size_t num_threads) {
     for (size_t i = 0; i < num_threads; i++) {
         threads.emplace_back([this]() {
             while (true) {

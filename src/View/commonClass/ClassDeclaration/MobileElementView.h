@@ -24,6 +24,11 @@ public:
      */
     explicit  MobileElementView(QGraphicsEllipseItem *parent = nullptr, int abscice=0, int ordered=0);
 
+    /**
+     * @brief this function receive the different coordinate of the element
+     * through a point to another and update it position
+     * @param data the tab of the different position of the mobile element
+     */
     void update(const std::unordered_map<std::string, std::any>& data) override;
 private:
     int x, y;

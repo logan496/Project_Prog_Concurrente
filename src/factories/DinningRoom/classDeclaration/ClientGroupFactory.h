@@ -21,10 +21,19 @@ public:
 
     ~ClientGroupFactory();
 
+    /**
+     * @brief this function is use to randomly create clients
+     * @return an instance of the class clientModel
+     */
     shared_ptr<ClientModel> createClientModel();
 
     std::string chooseClientType() const;
 
+    /**
+     *
+     * @param client_type_ the type of the client
+     * @return time wait time max of the client in the .env file
+     */
     int setClientWaitTime(const std::string &client_type_) const;
 
 private:

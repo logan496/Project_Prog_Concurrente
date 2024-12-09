@@ -8,6 +8,8 @@
 
 #include "DBController.h"
 #include "MotionlessElementController.h"
+#include "../Managers/classDeclaration/clientGroupManager.h"
+#include "../threadPool/ThreadPool.h"
 #include "../factories/DinningRoom/classDeclaration/ClientGroupFactory.h"
 #include "../Models/DinningRoom/classDeclaration/ClientGroup.h"
 
@@ -26,12 +28,22 @@ public:
      */
     MainController(DBController db_controller, const MotionlessElementController &motionless_element_controller)
         : dbController(std::move(db_controller)),
-          motionlessElementController(motionless_element_controller) {
+          motionlessElementController(motionless_element_controller),
+          pool(8),
+          manager_(factory_, client_group_creator_, pool),
+          numberOfTasks(client_group_creator_.returnRandomClientNumber()) {
     }
 
 private:
     DBController dbController;
     MotionlessElementController motionlessElementController;
+    ThreadPool pool;
+    ClientGroupCreator client_group_creator_;
+    ClientGroupFactory factory_;
+
+    ClientGroupManager manager_;
+
+    size_t numberOfTasks;
     // TODO: add the rest and modify where necessary
 };
 #endif //MAINCONTROLLER_H
