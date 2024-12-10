@@ -5,5 +5,28 @@
   },
   "path": {
     "envPath": "/home/wolverine/CLionProjects/Projet_Programmation_Syteme/Project_Prog_Concurrente/src/.env"
+  },
+  "Asssiettes": {
+    "petites_pour_entrees": 150,
+    "plates": 150,
+    "creuses": 30,
+    "plats_desserts": 150
+  },
+  "Couverts": {
+    "fourchettes": 150,
+    "couteaux": 150,
+    "cuilleres_a_soupes": 150,
+    "cuilleres_a_cafe": 150
+  },
+  "verres": {
+    "a_eau": 150,
+    "a_vin": 150,
+    "flutes_a_champagnes": 150
+  },
+  "jeux_tasses" : 50,
+  "nappes": 40,
+  "tables": {
+    "corbeille_pain" : 40,
+    "bouteille_eau": 40
   }
 }

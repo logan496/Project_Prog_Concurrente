@@ -1,7 +1,6 @@
 #ifndef CLIENTGROUPFACTORY_H
 #define CLIENTGROUPFACTORY_H
 #include <queue>
-#include <mutex>
 #include <condition_variable>
 #include <memory>
 #include <vector>
@@ -39,7 +38,6 @@ public:
 private:
     int clientIdCounter = 0;
     condition_variable client_created;
-    mutex client_created_mutex;
     std::queue<ClientModel> client_waiting_for_group;
 
 

@@ -21,23 +21,22 @@ add_executable(Projet_Programmation_Syteme
         src/main.cpp
         #        src/Controllers/classDefinition/MainController.cpp
         #        src/Controllers/classDeclaration/MainController.h
-        #        src/Controllers/classDefinition/MoveController.cpp
         src/Models/DinningRoom/classDeclaration/ClientModel.h
 
-        #        src/View/MainView.cpp
-        #        src/View/MainView.h
+        src/View/MainView.cpp
+        src/View/MainView.h
         #        src/View/DinningRoom/ClassDeclaration/ServerView.h
         #        src/View/DinningRoom/ClassDefinition/ServerView.cpp
         #        src/Models/DinningRoom/classDeclaration/Server.h
         #        src/Models/DinningRoom/classDefinition/Server.cpp
 
-        #        src/Observer/Observable.cpp
-        #        src/View/DinningRoom/ClassDeclaration/MobileElementView.h
-        #        src/View/DinningRoom/ClassDefinition/MobileElementView.cpp
-        #        src/Models/CommonClass/classDeclaration/MobilityModel.h
-        #        src/Models/CommonClass/classDefinition/MobilityModel.cpp
-        #        src/Controllers/classDeclaration/MoveController.h
-        #        src/Controllers/classDefinition/MoveController.cpp
+        src/Observer/Observable.cpp
+        src/View/commonClass/ClassDeclaration/MobileElementView.h
+        src/View/commonClass/ClassDefinition/MobileElementView.cpp
+        src/Models/CommonClass/classDeclaration/MobilityModel.h
+        src/Models/CommonClass/classDefinition/MobilityModel.cpp
+        src/Controllers/classDeclaration/MoveController.h
+        src/Controllers/classDefinition/MoveController.cpp
         src/factories/DinningRoom/classDefinition/ClientGroupFactory.cpp
         src/factories/DinningRoom/classDeclaration/ClientGroupFactory.h
         src/threadPool/ThreadPool.cpp
@@ -52,8 +51,10 @@ add_executable(Projet_Programmation_Syteme
         src/Models/DinningRoom/classDeclaration/ClientGroup.h
         src/factories/DinningRoom/classDeclaration/TableFactory.h
         src/factories/DinningRoom/classDefinition/TableFactory.cpp
-        src/View/commonClass/ClassDeclaration/MotionLessElementView.h
+#        src/View/commonClass/ClassDeclaration/MotionLessElementView.h
         src/Models/CommonClass/classDeclaration/MotionLessModel.h
+        src/Managers/classDeclaration/TableCreateManager.h
+        src/Managers/classDefinition/TableCreateManager.cpp
 
 
 )

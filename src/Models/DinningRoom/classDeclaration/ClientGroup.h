@@ -6,7 +6,7 @@
 #define CLIENTGROUPCREATOR_H
 #include <vector>
 #include "ClientModel.h"
-// #include "mutex"
+
 
 using namespace std;
 
@@ -17,7 +17,8 @@ using namespace std;
  */
 class ClientGroupCreator {
 public:
-    ClientGroupCreator(){};
+    ClientGroupCreator() {
+    };
 
     /**
      * @brief to create group of client if they are alone no group is needed
@@ -26,10 +27,10 @@ public:
      */
     void addClientGroup(const std::shared_ptr<ClientModel> &client_group, const int clientNumber) {
         clientGroups.push_back(*client_group);
-        if(i == clientNumber) {
+        if (i == clientNumber) {
             GroupsLists.push_back(clientGroups);
             cout << "groupe ajouter" << endl;
-        }else {
+        } else {
             i++;
             cout << "incrémentation" << endl;
             cout << i << endl;
@@ -42,13 +43,13 @@ public:
      */
     int returnRandomClientNumber() const {
         srand(time(0));
-        const int clientNumber = rand()% 10 + 1;
+        const int clientNumber = rand() % 10 + 1;
         return clientNumber;
     };
 
 private:
     vector<ClientModel> clientGroups;
-    vector<vector<ClientModel>> GroupsLists;
+    vector<vector<ClientModel> > GroupsLists;
     int i = 0;
 };
 #endif //CLIENTGROUPCREATOR_H

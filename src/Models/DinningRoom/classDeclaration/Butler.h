@@ -7,6 +7,7 @@
 #include <vector>
 #include "Table.h"
 #include "ClientModel.h"
+#include "../Models/CommonClass/classDeclaration/MotionLessModel.h"
 using namespace std;
 
 /**
@@ -15,7 +16,7 @@ using namespace std;
  * the class of the butler (he is supposed to welcome the client at thier
  * entry)
  */
-class Butler {
+class Butler  {
 public:
     /**
      * @brief Constructor of the class Butler
@@ -23,10 +24,10 @@ public:
      * @param client_n_umber
      * @param priority_table
      */
-    Butler(const int client_n_umber, const vector<int> &priority_table)
-        : clientNUmber(client_n_umber),
-          priorityTable(priority_table) {
-    }
+    // Butler(const int client_n_umber, const vector<int> &priority_table)
+    //     : clientNUmber(client_n_umber),
+    //       priorityTable(priority_table) {
+    // }
 
     /**
      * @ brief to assign a table to a client

@@ -9,7 +9,7 @@
 
 #include <QGraphicsScene>
 
-#include "../View/DinningRoom/ClassDeclaration/MobileElementView.h"
+#include "../View/commonClass//ClassDeclaration/MobileElementView.h"
 
 class MainWindow{
 public:

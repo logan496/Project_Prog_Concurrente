@@ -11,7 +11,7 @@
 // #include "../../Models/DinningRoom/classDeclaration/Server.h"
 // #include "../../Models/DinningRoom/classDeclaration/ClientModel.h"
 #include "../Models/CommonClass/classDeclaration/MobilityModel.h"
-#include "../View/DinningRoom/ClassDeclaration/MobileElementView.h"
+#include "../View/commonClass/ClassDeclaration/MobileElementView.h"
 using namespace std;
 
 /**

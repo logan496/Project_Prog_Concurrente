@@ -4,22 +4,22 @@
 
 #ifndef MOTIONLESSMODEL_H
 #define MOTIONLESSMODEL_H
-#include <QObject>
+
 
 /**
  * @class MotionlessElementModel
  *
  * @brief this class will be used to create motionless element on the map
  */
-class MotionlessElementModel : public QObject {
+class MotionlessElementModel {
 public:
     /**
      * @breif MotionlessElementModel constructor
-     * @param parent
      * @param abscice the actual x of the element
      * @param ordinate the actual y of the element
      */
-    explicit MotionlessElementModel(QObject *parent = nullptr, int abscice = 0, int ordinate = 0);
+    MotionlessElementModel(int abscice, int ordinate): abscice(0), ordinate(0) {
+    };
 
     int getAbscice() const { return abscice; }
     int getOrdinate() const { return ordinate; }

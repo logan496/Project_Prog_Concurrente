@@ -1,7 +1,7 @@
 //
 // Created by wolverine on 12/5/24.
 //
-#include "../View/DinningRoom/ClassDeclaration/MobileElementView.h"
+#include "../View/commonClass/ClassDeclaration/MobileElementView.h"
 
 #include <iostream>
 #include <ostream>

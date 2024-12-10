@@ -16,38 +16,27 @@
  * @brief the class table for the management of all the table of
  * the dinning room
  */
-class Table : public MotionlessElementModel{
+class Table : public MotionlessElementModel {
 public:
     /**
      * @brief Constructor of the class Table
      *
-     * @param parent
-     * @param absciceX
-     * @param ordinateY
      * @param capacity
      * @param occuped
      * @param client_list
      * @param bread_cart_needed
      */
-    // Table(double abscice, double intercept, int capacity, int occuped, const vector<ClientModel> &client_list,
-    //       int bread_cart_needed)
-    //     : abscice(abscice),
-    //       intercept(intercept),
-    //       capacity(capacity),
-    //       occuped(occuped),
-    //       clientList(client_list),
-    //       breadCartNeeded(bread_cart_needed) {
-    // }
 
-    Table(QObject *parent, int absciceX, int ordinateY, int capacity, bool occuped,
-     const vector<ClientModel> &client_list, int bread_cart_needed)
-     : MotionlessElementModel(parent, absciceX, ordinateY),
-       abscice(absciceX),
-       intercept(ordinateY),
-       capacity(capacity),
-       occuped(occuped),
-       clientList(client_list),
-       breadCartNeeded(bread_cart_needed) {
+
+    Table(int abscice, int ordinate, int capacity, bool occuped,
+          const vector<ClientModel> &client_list, int bread_cart_needed)
+        : MotionlessElementModel(abscice, ordinate),
+          abscice(abscice),
+          intercept(ordinate),
+          capacity(capacity),
+          occuped(occuped),
+          clientList(client_list),
+          breadCartNeeded(bread_cart_needed) {
     }
 
     /**
@@ -62,12 +51,6 @@ public:
      */
     void releaseClients();
 
-    void setAbscice(double abscice);
-    void setIntercept(double intercept);
-    void setOccuped(int occuped);
-    void setClientList(vector<ClientModel> clientList);
-
-
 private:
     double abscice;
     double intercept;
@@ -75,6 +58,5 @@ private:
     bool occuped;
     vector<ClientModel> clientList;
     int breadCartNeeded;
-
 };
 #endif //TABLE_H

@@ -1,203 +1,158 @@
-// #include <memory>
-// #include <string>
-// #include <chrono>
-// #include <thread>
-//
-// class ClientModel {
-// public:
-//     int id;
-//     std::string type;
-//     explicit ClientModel(int id, const std::string& type) : id(id), type(type) {}
-// };
-//
-// class ClientGroup {
-// public:
-//     void processClient(const std::shared_ptr<ClientModel>& client) {
-//         std::cout << "ClientGroup: Traitement du client " << client->id
-//                   << " de type " << client->type << "\n";
-//         std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Simuler un traitement
-//     }
-// };
-//
-// class ClientGroupFactory {
-// private:
-//     int clientIdCounter = 0;
-//
-// public:
-//     std::shared_ptr<ClientModel> createClientModel() {
-//         clientIdCounter++;
-//         std::string clientType = (clientIdCounter % 2 == 0) ? "Cool" : "Hurry";
-//         return std::make_shared<ClientModel>(clientIdCounter, clientType);
-//     }
-// };
-//
-// void factoryTask(ClientGroupFactory& factory, ThreadPool& threadPool, ClientGroup& clientGroup, int numClients) {
-//     for (int i = 0; i < numClients; ++i) {
-//         auto client = factory.createClientModel();
-//         std::cout << "Factory: Créé le client " << client->id << " de type " << client->type << "\n";
-//
-//         // Envoi de la tâche au pool de threads
-//         threadPool.enqueueTask([client, &clientGroup]() {
-//             clientGroup.processClient(client);
-//         });
-//
-//         std::this_thread::sleep_for(std::chrono::milliseconds(50)); // Simuler un délai entre créations
-//     }
-// }
-//
-// int main() {
-//     ClientGroupFactory factory;
-//     ClientGroup clientGroup;
-//
-//     // Crée un pool de 4 threads
-//     ThreadPool threadPool(4);
-//
-//     int numClients = 10;
-//
-//     // Lancer la factory dans le thread principal
-//     factoryTask(factory, threadPool, clientGroup, numClients);
-//
-//     std::cout << "Tous les clients ont été envoyés au pool de threads.\n";
-//
-//     return 0;
-// }
-//
-// #include <iostream>
-// #include <queue>
-// #include <thread>
-// #include <mutex>
-// #include <condition_variable>
-// #include <functional>
-// #include <vector>
-// #include <memory>
-// #include <atomic>
-//
-// // Classe ThreadPool
-// class ThreadPool {
-// private:
-//     std::vector<std::thread> workers;
-//     std::queue<std::function<void()>> tasks;
-//     std::mutex mtx;
-//     std::condition_variable cv;
-//     bool stop = false;
-//
-// public:
-//     explicit ThreadPool(size_t threadCount) {
-//         for (size_t i = 0; i < threadCount; ++i) {
-//             workers.emplace_back([this] {
-//                 while (true) {
-//                     std::function<void()> task;
-//                     {
-//                         std::unique_lock<std::mutex> lock(this->mtx);
-//                         this->cv.wait(lock, [this] { return this->stop || !this->tasks.empty(); });
-//
-//                         if (this->stop && this->tasks.empty()) return;
-//
-//                         task = std::move(this->tasks.front());
-//                         this->tasks.pop();
-//                     }
-//                     task();
-//                 }
-//             });
-//         }
-//     }
-//
-//     ~ThreadPool() {
-//         {
-//             std::lock_guard<std::mutex> lock(mtx);
-//             stop = true;
-//         }
-//         cv.notify_all();
-//         for (std::thread &worker : workers) {
-//             if (worker.joinable()) worker.join();
-//         }
-//     }
-//
-//     void enqueueTask(std::function<void()> task) {
-//         {
-//             std::lock_guard<std::mutex> lock(mtx);
-//             tasks.push(std::move(task));
-//         }
-//         cv.notify_one();
-//     }
-// };
-// // Classe représentant un client
-// /**
-//  * ici se séparent les deux
-//  */
-// class ClientModel {
-// public:
-//     int id;
-//     std::string type;
-//
-//     ClientModel(int id, const std::string& type) : id(id), type(type) {}
-// };
-//
-// // Factory pour créer des clients
-// class ClientGroupFactory {
-// private:
-//     int clientIdCounter = 0;
-//
-// public:
-//     std::shared_ptr<ClientModel> createClientModel() {
-//         clientIdCounter++;
-//         std::string clientType = (clientIdCounter % 2 == 0) ? "Cool" : "Hurry";
-//         return std::make_shared<ClientModel>(clientIdCounter, clientType);
-//     }
-// };
-//
-// // Classe représentant un groupe de clients
-// class ClientGroup {
-// public:
-//     void addClient(const std::shared_ptr<ClientModel>& client) {
-//         std::cout << "ClientGroup : Ajout du client " << client->id
-//                   << " de type " << client->type << "\n";
-//     }
-// };
-//
-// // TaskManager : Gère l'interaction entre les composants
-// // class TaskManager {
-// // private:
-// //     ClientGroupFactory& factory;
-// //     ClientGroup& clientGroup;
-// //     ThreadPool& threadPool;
-// //     std::atomic<bool> running;
-// //
-// // public:
-// //     TaskManager(ClientGroupFactory& factory, ClientGroup& clientGroup, ThreadPool& pool)
-// //         : factory(factory), clientGroup(clientGroup), threadPool(pool), running(false) {}
-// //
-// //     void start(size_t taskCount) {
-// //         running = true;
-// //
-// //         for (size_t i = 0; i < taskCount; ++i) {
-// //             threadPool.enqueueTask([this]() {
-// //                 auto client = factory.createClientModel(); // Crée un client
-// //                 clientGroup.addClient(client);             // Ajoute le client au groupe
-// //             });
-// //         }
-// //     }
-// //
-// //     void stop() {
-// //         running = false;
-// //     }
-// // };
-//
-// // Exemple d'utilisation
-// int main() {
-//     ThreadPool pool(4); // Crée un pool de threads avec 4 threads
-//     ClientGroupFactory factory;
-//     ClientGroup clientGroup;
-//
-//     TaskManager taskManager(factory, clientGroup, pool);
-//
-//     size_t numberOfTasks = 10; // Nombre de clients à créer et traiter
-//     taskManager.start(numberOfTasks);
-//
-//     // Laisser les threads terminer leurs tâches
-//     std::this_thread::sleep_for(std::chrono::seconds(2));
-//
-//     taskManager.stop();
-//
-//     return 0;
-// }
+#include "JsonReader.hpp"
+#include <fstream>
+#include <stdexcept>
+#include <cctype>
+
+// Lire un fichier JSON
+JsonReader::JsonValue JsonReader::readJsonFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Impossible d'ouvrir le fichier JSON : " + filename);
+    }
+
+    std::string jsonString((std::istreambuf_iterator<char>(file)),
+                            std::istreambuf_iterator<char>());
+    return parse(jsonString);
+}
+
+// Analyser une chaîne JSON
+JsonReader::JsonValue JsonReader::parse(const std::string& jsonString) {
+    size_t index = 0;
+    return parseValue(jsonString, index);
+}
+
+// Fonctions internes pour analyser les différents types
+JsonReader::JsonValue JsonReader::parseValue(const std::string& jsonString, size_t& index) {
+    skipWhitespace(jsonString, index);
+
+    if (jsonString[index] == '{') return parseObject(jsonString, index);
+    if (jsonString[index] == '[') return parseArray(jsonString, index);
+    if (jsonString[index] == '"') return parseString(jsonString, index);
+    if (std::isdigit(jsonString[index]) || jsonString[index] == '-') return parseNumber(jsonString, index);
+    if (jsonString.substr(index, 4) == "true" || jsonString.substr(index, 5) == "false") return parseBoolean(jsonString, index);
+    if (jsonString.substr(index, 4) == "null") return parseNull(jsonString, index);
+
+    throw std::runtime_error("Valeur JSON invalide à l'index " + std::to_string(index));
+}
+
+std::string JsonReader::parseString(const std::string& jsonString, size_t& index) {
+    if (jsonString[index] != '"') {
+        throw std::runtime_error("Chaîne attendue à l'index " + std::to_string(index));
+    }
+    index++; // Sauter le guillemet ouvrant
+
+    std::string result;
+    while (index < jsonString.size() && jsonString[index] != '"') {
+        if (jsonString[index] == '\\') {
+            index++;
+            if (jsonString[index] == 'n') result += '\n';
+            else if (jsonString[index] == 't') result += '\t';
+            else if (jsonString[index] == '"') result += '"';
+            else result += jsonString[index];
+        } else {
+            result += jsonString[index];
+        }
+        index++;
+    }
+    if (index >= jsonString.size() || jsonString[index] != '"') {
+        throw std::runtime_error("Chaîne non terminée à l'index " + std::to_string(index));
+    }
+    index++; // Sauter le guillemet fermant
+    return result;
+}
+
+double JsonReader::parseNumber(const std::string& jsonString, size_t& index) {
+    size_t start = index;
+    while (index < jsonString.size() && (std::isdigit(jsonString[index]) || jsonString[index] == '.' || jsonString[index] == '-')) {
+        index++;
+    }
+    return std::stod(jsonString.substr(start, index - start));
+}
+
+bool JsonReader::parseBoolean(const std::string& jsonString, size_t& index) {
+    if (jsonString.substr(index, 4) == "true") {
+        index += 4;
+        return true;
+    } else if (jsonString.substr(index, 5) == "false") {
+        index += 5;
+        return false;
+    }
+    throw std::runtime_error("Valeur booléenne invalide à l'index " + std::to_string(index));
+}
+
+std::nullptr_t JsonReader::parseNull(const std::string& jsonString, size_t& index) {
+    if (jsonString.substr(index, 4) == "null") {
+        index += 4;
+        return nullptr;
+    }
+    throw std::runtime_error("Valeur nulle invalide à l'index " + std::to_string(index));
+}
+
+std::map<std::string, JsonReader::JsonValue> JsonReader::parseObject(const std::string& jsonString, size_t& index) {
+    if (jsonString[index] != '{') {
+        throw std::runtime_error("Objet attendu à l'index " + std::to_string(index));
+    }
+    index++; // Sauter '{'
+
+    std::map<std::string, JsonValue> object;
+    skipWhitespace(jsonString, index);
+
+    while (index < jsonString.size() && jsonString[index] != '}') {
+        skipWhitespace(jsonString, index);
+        std::string key = parseString(jsonString, index);
+        skipWhitespace(jsonString, index);
+
+        if (jsonString[index] != ':') {
+            throw std::runtime_error("':' attendu à l'index " + std::to_string(index));
+        }
+        index++; // Sauter ':'
+
+        JsonValue value = parseValue(jsonString, index);
+        object[key] = value;
+
+        skipWhitespace(jsonString, index);
+        if (jsonString[index] == ',') {
+            index++; // Sauter ','
+        } else if (jsonString[index] != '}') {
+            throw std::runtime_error("',' ou '}' attendu à l'index " + std::to_string(index));
+        }
+    }
+    if (index >= jsonString.size() || jsonString[index] != '}') {
+        throw std::runtime_error("Objet non terminé à l'index " + std::to_string(index));
+    }
+    index++; // Sauter '}'
+    return object;
+}
+
+std::vector<JsonReader::JsonValue> JsonReader::parseArray(const std::string& jsonString, size_t& index) {
+    if (jsonString[index] != '[') {
+        throw std::runtime_error("Tableau attendu à l'index " + std::to_string(index));
+    }
+    index++; // Sauter '['
+
+    std::vector<JsonValue> array;
+    skipWhitespace(jsonString, index);
+
+    while (index < jsonString.size() && jsonString[index] != ']') {
+        JsonValue value = parseValue(jsonString, index);
+        array.push_back(value);
+
+        skipWhitespace(jsonString, index);
+        if (jsonString[index] == ',') {
+            index++; // Sauter ','
+        } else if (jsonString[index] != ']') {
+            throw std::runtime_error("',' ou ']' attendu à l'index " + std::to_string(index));
+        }
+    }
+    if (index >= jsonString.size() || jsonString[index] != ']') {
+        throw std::runtime_error("Tableau non terminé à l'index " + std::to_string(index));
+    }
+    index++; // Sauter ']'
+    return array;
+}
+
+void JsonReader::skipWhitespace(const std::string& jsonString, size_t& index) {
+    while (index < jsonString.size() && std::isspace(jsonString[index])) {
+        index++;
+    }
+}
