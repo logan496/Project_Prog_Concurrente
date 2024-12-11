@@ -55,8 +55,8 @@ add_executable(Projet_Programmation_Syteme
         src/Models/CommonClass/classDeclaration/MotionLessModel.h
         src/Managers/classDeclaration/TableCreateManager.h
         src/Managers/classDefinition/TableCreateManager.cpp
-
-
+        src/Models/DinningRoom/classDeclaration/DinningRoom.h
+        src/Models/DinningRoom/classDefinition/DinningRoom.cpp
 )
 
 # Inclure les répertoires d'en-têtes

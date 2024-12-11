@@ -8,6 +8,7 @@
 #include "Table.h"
 #include "ClientModel.h"
 #include "../Models/CommonClass/classDeclaration/MotionLessModel.h"
+#include "../Models/DinningRoom/classDeclaration/DinningRoom.h"
 using namespace std;
 
 /**
@@ -16,23 +17,30 @@ using namespace std;
  * the class of the butler (he is supposed to welcome the client at thier
  * entry)
  */
-class Butler  {
+class Butler : MotionlessElementModel {
 public:
     /**
      * @brief Constructor of the class Butler
      *
+     * @param abscice
+     * @param ordinate
      * @param client_n_umber
      * @param priority_table
+     * @param dinning_room
      */
-    // Butler(const int client_n_umber, const vector<int> &priority_table)
-    //     : clientNUmber(client_n_umber),
-    //       priorityTable(priority_table) {
-    // }
+
+    Butler(int abscice, int ordinate, int client_n_umber, const vector<int> &priority_table,
+           DinningRoom &dinning_room)
+     : MotionlessElementModel(abscice, ordinate),
+       clientNUmber(client_n_umber),
+       priorityTable(priority_table),
+       dinningRoom(dinning_room) {
+    }
 
     /**
-     * @ brief to assign a table to a client
+     * @brief to assign a table to a client
      */
-    void assignTable();
+    Table* assignTable(int clientNumber) const;
 
     /**
      * @brief to notify a headwaiter tha he has to take a client
@@ -46,5 +54,7 @@ public:
 private:
     int clientNUmber;
     vector<int> priorityTable;
+    DinningRoom &dinningRoom;
+    // vector<Table> emptyTable;
 };
 #endif //BUTLE_H

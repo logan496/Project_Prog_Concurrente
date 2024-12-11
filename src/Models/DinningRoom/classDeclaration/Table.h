@@ -13,7 +13,7 @@
 /**
  * @class Table
  *
- * @brief the class table for the management of all the table of
+ * @brief for the management of all the table of
  * the dinning room
  */
 class Table : public MotionlessElementModel {
@@ -21,23 +21,27 @@ public:
     /**
      * @brief Constructor of the class Table
      *
-     * @param capacity
-     * @param occuped
-     * @param client_list
-     * @param bread_cart_needed
+     * @param capacity the number of client the table can take
+     * @param occuped is the table has client on it or not
+     * @param client_list the list of client on the table
+     * @param bread_cart_needed the number of bread cart needed on the table by the client
      */
 
 
     Table(int abscice, int ordinate, int capacity, bool occuped,
           const vector<ClientModel> &client_list, int bread_cart_needed)
         : MotionlessElementModel(abscice, ordinate),
-          abscice(abscice),
-          intercept(ordinate),
           capacity(capacity),
           occuped(occuped),
           clientList(client_list),
           breadCartNeeded(bread_cart_needed) {
     }
+
+    /**
+     * @brief default constructor of the class table
+     */
+    Table(): MotionlessElementModel(0, 0), capacity(0), occuped(false), breadCartNeeded(0) {
+    };
 
     /**
      * @brief a function to add clients on the table
@@ -51,9 +55,13 @@ public:
      */
     void releaseClients();
 
+    void toogleOccuped();
+
+    bool returnOccupedState() const { return occuped; }
+
+    int getCapacity() const { return this->capacity; }
+
 private:
-    double abscice;
-    double intercept;
     int capacity;
     bool occuped;
     vector<ClientModel> clientList;

@@ -21,6 +21,10 @@ public:
 
     std::shared_ptr<Table> createFixedTable();
 
+    /**
+     * @brief this method classify table position by their array and square
+     * @return the position of each of the 34 tables
+     */
     std::pair<int, int> returnFixedPosition();
 
     int getNumberOfTask() const {return size(x_pos);}

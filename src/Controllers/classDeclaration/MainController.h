@@ -29,7 +29,6 @@ public:
     MainController(DBController db_controller, const MotionlessElementController &motionless_element_controller)
         : dbController(std::move(db_controller)),
           motionlessElementController(motionless_element_controller),
-          pool(8),
           manager_(factory_, client_group_creator_, pool),
           numberOfTasks(client_group_creator_.returnRandomClientNumber()) {
     }

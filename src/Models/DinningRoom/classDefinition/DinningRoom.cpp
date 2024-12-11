@@ -3,14 +3,20 @@
 //
 #include "../classDeclaration/DinningRoom.h"
 
-vector<Table> DinningRoom::getEmptyTableList(vector<Table> table) {
-    table = tableList;
-    /* TODO: ajouter une façon de parcourir la liste
-     * de table afin de trouve toutes celles vides
-     */
-    return table;
+vector<Table> DinningRoom::getEmptyTableList() {
+    for (Table &table_ : tableList) {
+        if(!table_.returnOccupedState()) {
+            emptyTableList.push_back(table_);
+        }
+    }
+    return emptyTableList;
 }
 
 vector<Table> DinningRoom::getTableList() {
-    return tableList;
+    return this->tableList;
+}
+
+void DinningRoom::setTableList(std::shared_ptr<Table> const &tableElement) {
+    this->tableList.push_back(*tableElement);
+    cout << "table ajoutée à la liste" << endl;
 }

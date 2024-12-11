@@ -3,15 +3,14 @@
 //
 #include "../Managers/classDeclaration/TableCreateManager.h"
 
-
-
 void TableCreateManager::start(const size_t taskcout) {
     isRunning = true;
 
-    for (size_t i = 0; i < taskcout; i++) {
+    for (size_t i = 0; i <= taskcout; i++) {
         threadPool.enqueue([this]() {
             lock_guard<mutex> mutex(lock);
-            tableFactory.createFixedTable();
+            auto const table = tableFactory.createFixedTable();
+            dinningRoom.setTableList(table);
         });
     }
 }
