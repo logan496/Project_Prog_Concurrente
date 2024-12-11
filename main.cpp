@@ -9,3 +9,5 @@ int main(int argc, char *argv[]) {
 
     return app.exec();
 }
+//je doit integerer le chemain d'access vers le l'executable de mon fichier views pour gerer linterface
+// exemple 
