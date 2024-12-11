@@ -1,0 +1,31 @@
+nous devanos verifier les chemins d'acces aux differents fichiers correspondanst
+Étapes pour la Connexion
+
+    Relier Order à ServeManager :
+        Lorsqu'une commande est prête en cuisine (KitchenCounter), elle est récupérée par le ServeManager.
+        Chaque commande récupérée est associée à une Table et potentiellement à un ou plusieurs clients.
+
+    Relier KitchenCounter à ServeManager :
+        KitchenCounter stocke les commandes prêtes. Le ServeManager interroge le comptoir pour récupérer ces commandes.
+
+    Relier Table à ServeManager :
+        Les plats récupérés par le ServeManager sont servis aux clients assis à une Table.
+
+    Relier DishwasherModel et UstensilModel à ServeManager :
+        Après le service, les ustensiles sales sont collectés via le ServeManager et envoyés à une DishwasherModel pour nettoyage.
+
+
+
+Résumé des Interactions
+
+    Récupération des Commandes :
+        ServeManager appelle KitchenCounter::getReadyOrders() pour obtenir les commandes prêtes.
+
+    Service des Commandes :
+        ServeManager appelle Table::serveOrder() pour associer une commande à une table.
+
+    Récupération des Ustensiles Sales :
+        ServeManager utilise Table::collectDirtyUstensils() pour collecter les ustensiles.
+
+    Transmission des Ustensiles Sales :
+        ServeManager transmet les ustensiles à la cuisine via KitchenCounter::addDirtyUstensils().
