@@ -7,11 +7,11 @@
 
 #include <vector>
 #include <string>
-#include "Recipe.h"  // Inclure la classe Recipe
-#include "Table.h"   // Inclure la classe Table
-#include "ClientModel.h" // Inclure la classe ClientModel
-#include "KitchenCounter.h" // Pour interaction avec la cuisine
-#include "UstensilModel.h" // Pour gestion des ustensiles
+#include "src/Models/classDeclaration/Recipe.h"  // Inclure la classe Recipe
+#include "src/Models/classDeclaration/Table.h"   // Inclure la classe Table
+#include "src/Models/classDeclaration/ClientModel.h" // Inclure la classe ClientModel
+#include "src/Models/classDeclaration/KitchenCounter.h" // Pour interaction avec la cuisine
+#include "src/Models/classDeclaration/UstensilModel.h" // Pour gestion des ustensiles
 
 class Order {
 public:

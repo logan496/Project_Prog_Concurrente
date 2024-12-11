@@ -1,30 +1,51 @@
-// Order.cpp
-#include "Order.h"
+// ServeManager.cpp
+#include "src/Controllers/classDefinition/ServeManager.h"
+#include <iostream>
 
-// Constructeurs
-Order::Order() : orderId(0), ready(false) {}
+// Constructeur
+ServeManager::ServeManager(KitchenCounter& counter, DishwasherModel& dishwasher, UstensilModel& ustensilModel)
+    : kitchenCounter(counter), dishwasher(dishwasher), ustensilModel(ustensilModel) {}
 
-Order::Order(int orderId, const std::vector<Recipe>& recipes, const std::string& clientName)
-    : orderId(orderId), recipes(recipes), clientName(clientName), ready(false) {}
-
-// Accesseurs
-int Order::getOrderId() const {
-    return orderId;
+// Récupérer les commandes prêtes sur le comptoir
+void ServeManager::retrieveOrderFromCounter() {
+    auto orders = kitchenCounter.getReadyOrders();
+    for (const auto& order : orders) {
+        if (order.getId() == 0) {
+            std::cerr << "Erreur : Commande avec un ID invalide récupérée." << std::endl;
+        } else {
+            retrievedOrders.push_back(order);
+            std::cout << "Commande " << order.getId() << " récupérée." << std::endl;
+        }
+    }
+    if (!orders.empty() && retrievedOrders.size() != orders.size()) {
+        std::cerr << "Erreur : Certaines commandes n'ont pas pu être récupérées correctement." << std::endl;
+    }
+    kitchenCounter.clearReadyOrders();
 }
 
-const std::vector<Recipe>& Order::getRecipes() const {
-    return recipes;
+// Servir une commande à une table
+void ServeManager::serveOrderToTable(Table& table) {
+    if (retrievedOrders.empty()) {
+        std::cout << "Aucune commande disponible pour servir." << std::endl;
+        return;
+    }
+    Order order = retrievedOrders.front();
+    retrievedOrders.erase(retrievedOrders.begin());
+    table.receiveOrder(order);
+    std::cout << "Commande " << order.getId() << " servie à la table." << std::endl;
 }
 
-const std::string& Order::getClientName() const {
-    return clientName;
+// Récupérer les ustensiles sales d'une table
+void ServeManager::collectDirtyUstensils(Table& table) {
+    auto dirtyUstensils = table.getDirtyUstensils();
+    ustensilModel.addDirtyUstensils(dirtyUstensils);
+    std::cout << dirtyUstensils.size() << " ustensiles sales récupérés de la table." << std::endl;
 }
 
-bool Order::isReady() const {
-    return ready;
-}
-
-// Mutateurs
-void Order::setReady(bool readyStatus) {
-    ready = readyStatus;
+// Envoyer les ustensiles sales au lave-vaisselle
+void ServeManager::sendDirtyUstensilsToDishwasher() {
+    auto dirtyUstensils = ustensilModel.getDirtyUstensils();
+    dishwasher.loadUstensils(dirtyUstensils);
+    ustensilModel.clearDirtyUstensils();
+    std::cout << "Ustensiles sales envoyés au lave-vaisselle." << std::endl;
 }
