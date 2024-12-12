@@ -21,7 +21,7 @@ public:
     ~ClientGroupFactory();
 
     /**
-     * @brief this function is use to randomly create clients
+     * @brief this function is used to randomly create clients
      * @return an instance of the class clientModel
      */
     shared_ptr<ClientModel> createClientModel();

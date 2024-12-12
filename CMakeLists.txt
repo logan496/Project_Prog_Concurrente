@@ -57,6 +57,15 @@ add_executable(Projet_Programmation_Syteme
         src/Managers/classDefinition/TableCreateManager.cpp
         src/Models/DinningRoom/classDeclaration/DinningRoom.h
         src/Models/DinningRoom/classDefinition/DinningRoom.cpp
+        src/Managers/classDeclaration/ManageLeadClient.h
+        src/Managers/classDefinition/ManageLeadClient.cpp
+        src/manageConfig/manageProducerConsumer/ManageProducerConsumer.cpp
+        src/manageConfig/manageProducerConsumer/ManageProducerConsumer.h
+        src/Managers/classDeclaration/ManageAssignTable.h
+        src/Managers/classDefinition/ManageAssignTable.cpp
+        src/Models/DinningRoom/classDeclaration/Butler.h
+        src/Models/DinningRoom/classDefinition/Butler.cpp
+        src/Models/DinningRoom/classDefinition/ClientGroup.cpp
 )
 
 # Inclure les répertoires d'en-têtes

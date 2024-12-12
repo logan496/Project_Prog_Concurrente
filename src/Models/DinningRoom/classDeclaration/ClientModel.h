@@ -60,6 +60,8 @@ public:
 
     void toogleHasOrderedEntree();
 
+    std::string sayHello(){return  "hello";}
+
     /**
      * @brief client method eat
      * @param order

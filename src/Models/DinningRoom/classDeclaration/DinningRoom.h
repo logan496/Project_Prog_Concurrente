@@ -43,6 +43,8 @@ public:
           secondSquareBusyServerNumber(second_square_busy_server_number) {
     }
 
+    DinningRoom(){}
+
     /**
      * @brief this function take the list of table which don't have any client
      * on and send it to the Butler
