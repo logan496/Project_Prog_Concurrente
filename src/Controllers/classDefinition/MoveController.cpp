@@ -9,7 +9,12 @@ MoveController::MoveController(MobileElementView* view, MobilityModel* mobilityM
         std::cout << "Error: Null pointer passed to MoveController!" << std::endl;
         return;
     }
+    setViewElement();
     mobilityModel->subscribe(view);
+
+}
+void MoveController::setViewElement() {
+    view = new MobileElementView(nullptr,mobilityModel->getAbscice(), mobilityModel->getOrdered());
 }
 
 void MoveController::moveElement(int deltaX, int deltaY) {

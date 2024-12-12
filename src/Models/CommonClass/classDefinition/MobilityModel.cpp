@@ -1,12 +1,12 @@
 // Created by wolverine on 12/6/24.
 #include "../Models/CommonClass/classDeclaration/MobilityModel.h"
-
 #include <iostream>
-#include <QTimer>
+#include <QObject>
 
-MobilityModel::MobilityModel(QObject *parent)
-    : QObject(parent), abscice(10), ordered(10), deltaX(0), deltaY(0),
-      timer(new QTimer(this)) {}
+MobilityModel::MobilityModel(QObject *parent, int abscice, int ordered)
+    : QObject(parent), abscice(abscice), ordered(ordered), deltaX(0), deltaY(0),
+      timer(new QTimer(this)) {
+}
 
 bool MobilityModel::isAtDestionAbscice(int targetX) const {
     return abscice == targetX;
@@ -16,12 +16,20 @@ bool MobilityModel::isAtDestinationIntercept(int targetY) const {
     return ordered == targetY;
 }
 
+int MobilityModel::getAbscice() const {
+    return abscice;
+}
+
+int MobilityModel::getOrdered() const {
+    return ordered;
+}
+
 void MobilityModel::updatePosition() {
     connect(timer, &QTimer::timeout, [this]() {
         if (abscice != deltaX) {
             abscice += (deltaX > abscice ? 1 : -1);
             notify({{"x", abscice}});
-        }else if(ordered != deltaY) {
+        } else if (ordered != deltaY) {
             ordered += (deltaY > ordered ? 1 : -1);
             notify({{"y", ordered}});
         }

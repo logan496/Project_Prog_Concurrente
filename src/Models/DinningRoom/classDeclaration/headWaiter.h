@@ -4,7 +4,7 @@
 
 #ifndef HEADWAITER_H
 #define HEADWAITER_H
-#include "./CommonClass/classDeclaration/Order.h"
+//#include "./CommonClass/classDeclaration/Order.h"
 #include "Table.h"
 #include "ClientModel.h"
 #include <queue>
@@ -14,7 +14,7 @@
  * @brief the guys who lead the client to his table
  */
 class HeadWaiter {
-    queue<Order> orderQueue;
+    //queue<Order> orderQueue;
 public:
     /**
      * @brief the function to lead the clients to their table
