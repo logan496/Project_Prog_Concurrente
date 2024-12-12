@@ -1,0 +1,31 @@
+Modules 
+1-Accueil des clients : 
+ *Creation des clients
+ *Assigner une table 
+ *conduire à la table 
+2-passage de commande :
+ *passer commande (entrée plat dessert tout en 1 ou individuellement)
+ *prendre commande
+ *envoyer la commande en cuisine
+3-Servir commande :
+ *récuperer des commande sur le comptoir
+ *servir les clients (pain, plats, boissons)
+ *récupérer les ustensils salles lorsque le client à finis
+ *passer ustensil à la cuisine 
+5-Cuisiner :
+ *recevoir commande
+ *dispatcher commande
+ *faire commande
+ *déposer commande sur le comptoir 
+6-Nettoyage:
+ *recevoir nappes et ustensils sales 
+ *passer les objets salles au lave vaisselle/machine à laver
+ *récuperer les objets propres et les garder
+7-Vérification :
+ *vérifier les tables libres 
+ *vérifier les serveurs et les chefs de rang libre/occupé
+ *déclencher les fonctions help
+8-Configuration :
+ *récuperer les config des fichiers de config (.env, json)
+ *récuperer les parametres de la bd et les chargés dans des json
+
