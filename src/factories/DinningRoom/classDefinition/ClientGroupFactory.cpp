@@ -16,7 +16,7 @@ shared_ptr<ClientModel> ClientGroupFactory::createClientModel() {
     clientIdCounter++;
     const std::string random_client_type = chooseClientType();
     int clientWaitTime = setClientWaitTime(random_client_type);
-
+    cout << "client créer" << endl;
     return std::make_shared<ClientModel>(random_client_type, clientIdCounter, false, clientWaitTime, false, false,
                                          false);
 }

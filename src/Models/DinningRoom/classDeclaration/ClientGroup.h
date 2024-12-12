@@ -6,6 +6,9 @@
 #define CLIENTGROUPCREATOR_H
 #include <vector>
 #include "ClientModel.h"
+// #include <mutex>
+// #include <condition_variable>
+// #include <memory>
 
 
 using namespace std;
@@ -15,41 +18,40 @@ using namespace std;
  *
  * @brief the generations of clients group
  */
-class ClientGroupCreator {
+class ClientGroupCreator : public Observable{
 public:
-    ClientGroupCreator() {
-    };
-
+    // /**
+    //  * @brief  the constructor of the class ClientGroupCreator
+    //  * @param client_group the list of the group of client shared with the butler
+    //  * @param mutex_mutex
+    //  * @param cv
+    //  */
+    // ClientGroupCreator(vector<vector<ClientModel> > &client_group, mutex &mutex_mutex,
+    //                    condition_variable &cv) : sharedClientGroups(client_group),
+    //                                              mutex_(mutex_mutex),
+    //                                              cv(cv) {
+    // };
+    ClientGroupCreator(vector<vector<ClientModel>> sharedList): sharedClientGroups(sharedList) {
+    } ;
     /**
-     * @brief to create group of client if they are alone no group is needed
-     * @param client_group this list contains the different clients object
-     * @param clientNumber
+     * @brief this method is used to add different clients in groups
+     * @param client_group an instance of the clientModel class comming from the factory
+     * @param clientNumber the number of clients in the actual group
      */
-    void addClientGroup(const std::shared_ptr<ClientModel> &client_group, const int clientNumber) {
-        clientGroups.push_back(*client_group);
-        if (i == clientNumber) {
-            GroupsLists.push_back(clientGroups);
-            cout << "groupe ajouter" << endl;
-        } else {
-            i++;
-            cout << "incrémentation" << endl;
-            cout << i << endl;
-        }
-    }
+    void addClientGroup(const std::shared_ptr<ClientModel> &client_group, const int clientNumber);
 
     /**
      * @brief returns the number of client of a group
      * @return  @var clientNumber the number of client of the actual group
      */
-    int returnRandomClientNumber() const {
-        srand(time(0));
-        const int clientNumber = rand() % 10 + 1;
-        return clientNumber;
-    };
+    int returnRandomClientNumber() const;
+
 
 private:
     vector<ClientModel> clientGroups;
-    vector<vector<ClientModel> > GroupsLists;
+    vector<vector<ClientModel> > &sharedClientGroups;
     int i = 0;
+    // mutex &mutex_;
+    // condition_variable &cv;
 };
 #endif //CLIENTGROUPCREATOR_H

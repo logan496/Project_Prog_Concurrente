@@ -8,7 +8,7 @@
 #include "../factories/DinningRoom/classDeclaration/ClientGroupFactory.h"
 #include "../Models/DinningRoom/classDeclaration/ClientGroup.h"
 #include "../threadPool/ThreadPool.h"
-#include "mutex"
+#include <mutex>
 
 /**
  * @class ClientGroupManager
@@ -43,7 +43,7 @@ public:
 
 private:
     ClientGroupFactory &clientGroupFactory;
-    ClientGroupCreator clientGroupCreator;
+    ClientGroupCreator &clientGroupCreator;
     ThreadPool &threadPool;
     std::atomic<bool> isRunning;
     mutex lock;

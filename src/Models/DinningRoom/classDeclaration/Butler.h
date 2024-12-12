@@ -17,30 +17,36 @@ using namespace std;
  * the class of the butler (he is supposed to welcome the client at thier
  * entry)
  */
-class Butler : MotionlessElementModel {
+class Butler : public MotionlessElementModel, public Observer {
 public:
     /**
      * @brief Constructor of the class Butler
      *
-     * @param abscice
-     * @param ordinate
-     * @param client_n_umber
-     * @param priority_table
-     * @param dinning_room
+     * @param abscice the actual x of the butler
+     * @param ordinate the actual y of the butler
+     * @param client_n_umber the number of client in a group
+     * @param dinning_room an instance of the class DinningRoom
+     * @param mutex
+     * @param cv
+     * @param sharedClientGroupList the actual list of client group shared with ClientGroup.
      */
 
-    Butler(int abscice, int ordinate, int client_n_umber, const vector<int> &priority_table,
+    Butler(int abscice, int ordinate, int client_n_umber,
            DinningRoom &dinning_room)
-     : MotionlessElementModel(abscice, ordinate),
-       clientNUmber(client_n_umber),
-       priorityTable(priority_table),
-       dinningRoom(dinning_room) {
+        : MotionlessElementModel(abscice, ordinate),
+          clientNUmber(client_n_umber),
+          dinningRoom(dinning_room) {
     }
+
+    Butler(): MotionlessElementModel(20, 20), clientNUmber(0), dinningRoom(dinningRoom) {
+    };
+
+
 
     /**
      * @brief to assign a table to a client
      */
-    Table* assignTable(int clientNumber) const;
+    Table *assignTable() const;
 
     /**
      * @brief to notify a headwaiter tha he has to take a client
@@ -51,10 +57,18 @@ public:
      */
     void notifyHeadWaiter(Table table, ClientModel client);
 
+    // std::vector<ClientModel> waitForGroupOfClient() const;
+
+    void update(const std::unordered_map<std::string, std::any> &data) override;
+
 private:
-    int clientNUmber;
-    vector<int> priorityTable;
+    mutable int clientNUmber;
+    //vector<int> priorityTable;
     DinningRoom &dinningRoom;
+    vector<ClientModel> clientListGroup;
+    vector<vector<ClientModel>> sharedClient;
+    // mutex &mutex_;
+    // condition_variable &cv;
     // vector<Table> emptyTable;
 };
 #endif //BUTLE_H

@@ -1,22 +1,64 @@
-Table Butler::assignTable(int clientNumber) {
-    Table bestFitTable; // Variable pour stocker la meilleure table trouvée
-    bool tableFound = false;
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <queue>
+#include <memory>
 
-    for (Table &emptyTable : dinningRoom.getEmptyTableList()) {
-        if (emptyTable.getCapacity() == clientNumber) {
-            return emptyTable; // Retourne immédiatement la table si elle correspond exactement
-        } else if (emptyTable.getCapacity() >= clientNumber) {
-            // Si aucune correspondance exacte, stocke une table avec une capacité suffisante
-            if (!tableFound || emptyTable.getCapacity() < bestFitTable.getCapacity()) {
-                bestFitTable = emptyTable;
-                tableFound = true;
-            }
+class Producer {
+public:
+    Producer(std::queue<int>& dataQueue, std::mutex& mtx, std::condition_variable& cv)
+        : dataQueue(dataQueue), mtx(mtx), cv(cv) {}
+
+    void produce(int maxItems) {
+        for (int i = 0; i < maxItems; ++i) {
+            std::unique_lock<std::mutex> lock(mtx);
+            dataQueue.push(i);
+            std::cout << "Produit : " << i << std::endl;
+            cv.notify_one(); // Notifier le consommateur
         }
     }
 
-    if (tableFound) {
-        return bestFitTable; // Retourne la meilleure correspondance trouvée
+private:
+    std::queue<int>& dataQueue;
+    std::mutex& mtx;
+    std::condition_variable& cv;
+};
+
+class Consumer {
+public:
+    Consumer(std::queue<int>& dataQueue, std::mutex& mtx, std::condition_variable& cv)
+        : dataQueue(dataQueue), mtx(mtx), cv(cv) {}
+
+    void consume() {
+        while (true) {
+            std::unique_lock<std::mutex> lock(mtx);
+            cv.wait(lock, [this]() { return !dataQueue.empty(); }); // Attente conditionnelle
+            int value = dataQueue.front();
+            dataQueue.pop();
+            std::cout << "Consommé : " << value << std::endl;
+        }
     }
 
-    throw std::runtime_error("No suitable table available."); // Gère les cas où aucune table n'est trouvée
+private:
+    std::queue<int>& dataQueue;
+    std::mutex& mtx;
+    std::condition_variable& cv;
+};
+
+int main() {
+    std::queue<int> dataQueue;
+    std::mutex mtx;
+    std::condition_variable cv;
+
+    Producer producer(dataQueue, mtx, cv);
+    Consumer consumer(dataQueue, mtx, cv);
+
+    std::thread producerThread(&Producer::produce, &producer, 10);
+    std::thread consumerThread(&Consumer::consume, &consumer);
+
+    producerThread.join();
+    consumerThread.detach(); // Pour cet exemple, détaché car la boucle consommateur est infinie.
+
+    return 0;
 }

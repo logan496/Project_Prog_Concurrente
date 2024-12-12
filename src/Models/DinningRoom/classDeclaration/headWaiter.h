@@ -5,6 +5,7 @@
 #ifndef HEADWAITER_H
 #define HEADWAITER_H
 //#include "./CommonClass/classDeclaration/Order.h"
+#include "../Models/CommonClass/classDeclaration/MobilityModel.h"
 #include "Table.h"
 #include "ClientModel.h"
 #include <queue>
@@ -13,7 +14,7 @@
  *
  * @brief the guys who lead the client to his table
  */
-class HeadWaiter {
+class HeadWaiter : public MobilityModel{
     //queue<Order> orderQueue;
 public:
     /**
