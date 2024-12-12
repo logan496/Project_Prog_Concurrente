@@ -18,7 +18,7 @@ public:
      * @param abscice the actual x of the element
      * @param ordinate the actual y of the element
      */
-    MotionlessElementModel(int abscice, int ordinate): abscice(0), ordinate(0) {
+    MotionlessElementModel(int abscice, int ordinate): abscice(abscice), ordinate(ordinate) {
     };
 
     int getAbscice() const { return abscice; }

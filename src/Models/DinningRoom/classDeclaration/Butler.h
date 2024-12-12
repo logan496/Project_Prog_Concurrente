@@ -9,6 +9,7 @@
 #include "ClientModel.h"
 #include "../Models/CommonClass/classDeclaration/MotionLessModel.h"
 #include "../Models/DinningRoom/classDeclaration/DinningRoom.h"
+#include "../manageConfig/dataShared/ShareData.h"
 using namespace std;
 
 /**
@@ -17,7 +18,7 @@ using namespace std;
  * the class of the butler (he is supposed to welcome the client at thier
  * entry)
  */
-class Butler : public MotionlessElementModel, public Observer {
+class Butler : public MotionlessElementModel {
 public:
     /**
      * @brief Constructor of the class Butler
@@ -32,15 +33,15 @@ public:
      */
 
     Butler(int abscice, int ordinate, int client_n_umber,
-           DinningRoom &dinning_room)
+           DinningRoom &dinning_room, ShareData &sharedData)
         : MotionlessElementModel(abscice, ordinate),
           clientNUmber(client_n_umber),
-          dinningRoom(dinning_room) {
+          dinningRoom(dinning_room),
+          data(sharedData) {
     }
 
-    Butler(): MotionlessElementModel(20, 20), clientNUmber(0), dinningRoom(dinningRoom) {
-    };
-
+    // Butler(): MotionlessElementModel(20, 20), clientNUmber(0), dinningRoom(dinningRoom) {
+    // };
 
 
     /**
@@ -57,16 +58,16 @@ public:
      */
     void notifyHeadWaiter(Table table, ClientModel client);
 
-    // std::vector<ClientModel> waitForGroupOfClient() const;
+    std::vector<ClientModel> waitForGroupOfClient() const;
 
-    void update(const std::unordered_map<std::string, std::any> &data) override;
+    // void update(const std::unordered_map<std::string, std::any> &data) override;
 
 private:
     mutable int clientNUmber;
     //vector<int> priorityTable;
     DinningRoom &dinningRoom;
     vector<ClientModel> clientListGroup;
-    vector<vector<ClientModel>> sharedClient;
+    ShareData &data;
     // mutex &mutex_;
     // condition_variable &cv;
     // vector<Table> emptyTable;

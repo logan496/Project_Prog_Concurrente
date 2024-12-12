@@ -40,8 +40,7 @@ public:
     /**
      * @brief default constructor of the class table
      */
-    Table(): MotionlessElementModel(0, 0), capacity(0), occuped(false), breadCartNeeded(0) {
-    };
+
 
     /**
      * @brief a function to add clients on the table

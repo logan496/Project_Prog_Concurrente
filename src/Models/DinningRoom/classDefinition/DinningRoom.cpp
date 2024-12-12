@@ -18,5 +18,4 @@ vector<Table> DinningRoom::getTableList() {
 
 void DinningRoom::setTableList(std::shared_ptr<Table> const &tableElement) {
     this->tableList.push_back(*tableElement);
-    cout << "table ajoutée à la liste" << endl;
 }

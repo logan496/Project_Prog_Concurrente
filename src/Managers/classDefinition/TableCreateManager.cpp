@@ -8,7 +8,7 @@ void TableCreateManager::start(const size_t taskcout) {
 
     for (size_t i = 0; i <= taskcout; i++) {
         threadPool.enqueue([this]() {
-            lock_guard<mutex> mutex(lock);
+            lock_guard<mutex> guard (lock);
             auto const table = tableFactory.createFixedTable();
             dinningRoom.setTableList(table);
         });
