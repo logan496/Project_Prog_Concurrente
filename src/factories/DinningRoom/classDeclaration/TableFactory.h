@@ -8,6 +8,7 @@
 
 #include "../Models/DinningRoom/classDeclaration/Table.h"
 #include "../Models/DinningRoom/classDeclaration/ClientModel.h"
+#include <mutex>
 
 /**
  * @class TableFactory
@@ -48,5 +49,6 @@ private:
 
     int i = 0;
     std::pair <int, int> actual_table_coordinate_;
+    mutex lock;
 };
 #endif //TABLEFACTORY_H
