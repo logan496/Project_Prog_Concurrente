@@ -6,10 +6,8 @@
 #define CLIENTGROUPCREATOR_H
 #include <vector>
 #include "ClientModel.h"
-// #include <mutex>
-// #include <condition_variable>
-// #include <memory>
-
+#include <mutex>
+#include "../manageConfig/dataShared/ShareData.h"
 
 using namespace std;
 
@@ -31,8 +29,7 @@ public:
     //                                              mutex_(mutex_mutex),
     //                                              cv(cv) {
     // };
-    ClientGroupCreator(vector<vector<ClientModel>> sharedList): sharedClientGroups(sharedList) {
-    } ;
+    explicit ClientGroupCreator(ShareData& sharedData): data(sharedData) {} ;
     /**
      * @brief this method is used to add different clients in groups
      * @param client_group an instance of the clientModel class comming from the factory
@@ -49,9 +46,7 @@ public:
 
 private:
     vector<ClientModel> clientGroups;
-    vector<vector<ClientModel> > &sharedClientGroups;
+    ShareData& data;
     int i = 0;
-    // mutex &mutex_;
-    // condition_variable &cv;
 };
 #endif //CLIENTGROUPCREATOR_H

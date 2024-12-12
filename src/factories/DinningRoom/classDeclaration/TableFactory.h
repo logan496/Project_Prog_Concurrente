@@ -35,20 +35,28 @@ public:
 private:
     vector<ClientModel> client_list_{};
     int bread_cart_needed_ = 0; // default value
-    int x_pos[33] = {
-        0, 2, 4, 6, 8, 10, 12, 14, 16, 0, 2, 4, 6, 8, 10, 12, 14, 16,
-        20, 22, 24, 26, 28, 30, 32, 34, 20, 22, 24, 26, 28, 30, 32
+    int y_pos[33] = {
+        // Colonne 1 (gauche)
+        50, 130, 210, 290, 370, 450, 530, 610, 690, 770, 850,
+        // Colonne 2 (gauche)
+        50, 130, 210, 290, 370, 450, 530, 610, 690, 770, 850,
+        // Ligne (droite supérieure)
+        50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50
     };
 
-    int y_pos[33] = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0,
-        3, 3, 3, 3, 3, 3, 3, 3, 3,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        3, 3, 3, 3, 3, 3, 3
+    int x_pos[33] = {
+        // Colonne 1 (gauche)
+        50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+        // Colonne 2 (gauche)
+        130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130,
+        // Ligne (droite supérieure)
+        750, 830, 910, 990, 1070, 1150, 1230, 1310, 1390, 1470, 1550
     };
+
 
     int i = 0;
-    std::pair <int, int> actual_table_coordinate_;
+    std::pair<int, int> actual_table_coordinate_;
+
     mutex lock;
 };
 #endif //TABLEFACTORY_H

@@ -1,64 +1,66 @@
 #include <iostream>
+#include <vector>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include <queue>
-#include <memory>
+#include <functional>
+#include <future>
+
+class SharedData {
+public:
+    std::vector<int> shared_list; // Liste partagée
+    std::mutex list_mutex; // Mutex pour protéger l'accès
+    std::condition_variable list_condition; // Condition pour synchroniser les threads
+};
 
 class Producer {
-public:
-    Producer(std::queue<int>& dataQueue, std::mutex& mtx, std::condition_variable& cv)
-        : dataQueue(dataQueue), mtx(mtx), cv(cv) {}
-
-    void produce(int maxItems) {
-        for (int i = 0; i < maxItems; ++i) {
-            std::unique_lock<std::mutex> lock(mtx);
-            dataQueue.push(i);
-            std::cout << "Produit : " << i << std::endl;
-            cv.notify_one(); // Notifier le consommateur
-        }
-    }
-
 private:
-    std::queue<int>& dataQueue;
-    std::mutex& mtx;
-    std::condition_variable& cv;
+    SharedData& data; // Référence à la structure partagée
+public:
+    explicit Producer(SharedData& sharedData) : data(sharedData) {}
+
+    void addToList(int value) {
+        {
+            std::unique_lock<std::mutex> lock(data.list_mutex);
+            data.shared_list.push_back(value);
+            std::cout << "Producer: Added " << value << " to list\n";
+        }
+        data.list_condition.notify_one(); // Notifier que la liste a changé
+    }
 };
 
 class Consumer {
-public:
-    Consumer(std::queue<int>& dataQueue, std::mutex& mtx, std::condition_variable& cv)
-        : dataQueue(dataQueue), mtx(mtx), cv(cv) {}
-
-    void consume() {
-        while (true) {
-            std::unique_lock<std::mutex> lock(mtx);
-            cv.wait(lock, [this]() { return !dataQueue.empty(); }); // Attente conditionnelle
-            int value = dataQueue.front();
-            dataQueue.pop();
-            std::cout << "Consommé : " << value << std::endl;
-        }
-    }
-
 private:
-    std::queue<int>& dataQueue;
-    std::mutex& mtx;
-    std::condition_variable& cv;
+    SharedData& data; // Référence à la structure partagée
+public:
+    explicit Consumer(SharedData& sharedData) : data(sharedData) {}
+
+    void processList() {
+        std::unique_lock<std::mutex> lock(data.list_mutex);
+        data.list_condition.wait(lock, [this] {
+            return !data.shared_list.empty(); // Attendre que la liste ne soit pas vide
+        });
+
+        int value = data.shared_list.back();
+        data.shared_list.pop_back();
+        std::cout << "Consumer: Processed " << value << " from list\n";
+    }
 };
 
 int main() {
-    std::queue<int> dataQueue;
-    std::mutex mtx;
-    std::condition_variable cv;
+    SharedData sharedData; // Données partagées entre les threads
+    Producer producer(sharedData);
+    Consumer consumer(sharedData);
 
-    Producer producer(dataQueue, mtx, cv);
-    Consumer consumer(dataQueue, mtx, cv);
+    ThreadPool pool(4); // Pool de threads avec 4 threads
 
-    std::thread producerThread(&Producer::produce, &producer, 10);
-    std::thread consumerThread(&Consumer::consume, &consumer);
+    // Ajouter des tâches dans le pool de threads
+    pool.enqueue(&Producer::addToList, &producer, 42);
+    pool.enqueue(&Producer::addToList, &producer, 7);
+    pool.enqueue(&Consumer::processList, &consumer);
+    pool.enqueue(&Consumer::processList, &consumer);
 
-    producerThread.join();
-    consumerThread.detach(); // Pour cet exemple, détaché car la boucle consommateur est infinie.
-
+    // Donner du temps aux threads pour terminer leur exécution
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     return 0;
 }
