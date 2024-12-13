@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1734061316 source:c:\users\michèlle\onedrive\documents\projet prog. concurrente\modulenettoyage\main.cpp
+	<iostream>
+	<vector>
+	<string>
+
