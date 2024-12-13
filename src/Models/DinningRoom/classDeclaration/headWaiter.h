@@ -17,17 +17,31 @@
 class HeadWaiter : public MobilityModel{
     //queue<Order> orderQueue;
 public:
+    HeadWaiter(QObject *parent, int abscice, int ordered
+        )
+        : MobilityModel(parent, abscice, ordered),
+          //actualClientList(actual_client_list),
+          actualTable(nullptr),
+          isBusy(false) {
+    }
+
     /**
      * @brief the function to lead the clients to their table
      *
      * @param table
      * @param clients
      */
-    void leadClients(Table &table, vector<ClientModel> &clients);
+    void leadClients();
 
+    void setActualTable(const Table *table);
     /**
      * @brief the function to take order and pass it to the chief
      */
     void passOrdersTochief();
+private:
+    vector<ClientModel> actualClientList;
+    const Table *actualTable;
+    std::atomic<bool> isBusy;
+
 };
 #endif //HEADWAITER_H

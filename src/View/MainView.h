@@ -11,9 +11,10 @@
 #include "../View/commonClass//ClassDeclaration/MobileElementView.h"
 #include "../Models/DinningRoom/classDeclaration/DinningRoom.h"
 #include "../manageConfig/readEnv/EnvReader.h"
-class MainWindow{
+class MainWindow : public QGraphicsEllipseItem{
 public:
     explicit MainWindow(MobileElementView *element_view, DinningRoom *dinning_room);
+    // explicit MainWindow(MobileElementView *element_view);
     ~MainWindow();
 
     void createTable();

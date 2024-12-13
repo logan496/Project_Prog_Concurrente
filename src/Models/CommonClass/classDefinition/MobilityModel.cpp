@@ -8,6 +8,7 @@ MobilityModel::MobilityModel(QObject *parent, int abscice, int ordered)
       timer(new QTimer(this)) {
 }
 
+
 bool MobilityModel::isAtDestionAbscice(int targetX) const {
     return abscice == targetX;
 }
@@ -25,7 +26,8 @@ int MobilityModel::getOrdered() const {
 }
 
 void MobilityModel::updatePosition() {
-    connect(timer, &QTimer::timeout, [this]() {
+    QMetaObject::invokeMethod(this,[this]() {
+        connect(timer, &QTimer::timeout, [this]() {
         if (abscice != deltaX) {
             abscice += (deltaX > abscice ? 1 : -1);
             notify({{"x", abscice}});
@@ -38,6 +40,8 @@ void MobilityModel::updatePosition() {
         }
     });
     timer->start(16); // 60 FPS
+    }, Qt::QueuedConnection);
+
 }
 
 void MobilityModel::move(int delX, int delY) {
