@@ -35,8 +35,6 @@ add_executable(Projet_Programmation_Syteme
         src/View/commonClass/ClassDefinition/MobileElementView.cpp
         src/Models/CommonClass/classDeclaration/MobilityModel.h
         src/Models/CommonClass/classDefinition/MobilityModel.cpp
-        src/Controllers/classDeclaration/MoveController.h
-        src/Controllers/classDefinition/MoveController.cpp
         src/factories/DinningRoom/classDefinition/ClientGroupFactory.cpp
         src/factories/DinningRoom/classDeclaration/ClientGroupFactory.h
         src/threadPool/ThreadPool.cpp
@@ -65,6 +63,9 @@ add_executable(Projet_Programmation_Syteme
         src/Models/DinningRoom/classDefinition/Butler.cpp
         src/Models/DinningRoom/classDefinition/ClientGroup.cpp
         src/manageConfig/dataShared/ShareData.h
+        src/Models/DinningRoom/classDefinition/HeadWaiter.cpp
+        src/Models/DinningRoom/classDeclaration/headWaiter.h
+
 )
 
 # Inclure les répertoires d'en-têtes

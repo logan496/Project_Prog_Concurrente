@@ -22,7 +22,10 @@ void ManageAssignTable::start(size_t taskcout) {
     //
     // });
     threadPool.enqueue([this]() {
-       const auto group = butler_.waitForGroupOfClient();
+        const auto group = butler_.waitForGroupOfClient();
+        lock_guard<mutex> guard(lock);
+        head_waiter_.setActualTable(butler_.assignTable());
+
         cout << "Groupe de client : " << group.size() << endl;
     });
 }

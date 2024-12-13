@@ -30,7 +30,7 @@ public:
 
     int getNumberOfTask() const {return size(x_pos);}
 
-    int ManageCapacityOfTable();
+    int ManageCapacityOfTable() const;
 
 private:
     vector<ClientModel> client_list_{};
@@ -56,7 +56,7 @@ private:
 
     int i = 0;
     std::pair<int, int> actual_table_coordinate_;
-
+    int table_capacity[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     mutex lock;
 };
 #endif //TABLEFACTORY_H

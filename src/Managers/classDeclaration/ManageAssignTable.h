@@ -7,6 +7,7 @@
 
 #include "../threadPool/ThreadPool.h"
 #include "../Models/DinningRoom/classDeclaration/Butler.h"
+#include "../Models/DinningRoom/classDeclaration/headWaiter.h"
 
 #include <mutex>
 
@@ -18,11 +19,16 @@
  */
 class ManageAssignTable {
 public:
-    ManageAssignTable(Butler &butler, ThreadPool &thread_pool)
-        : butler_(butler),
+    /**
+     * @brief the constructor of the ManageAssignTable class
+     * @param butler
+     * @param thread_pool
+     * @param head_waiter
+     */
+    ManageAssignTable(Butler &butler, ThreadPool &thread_pool, HeadWaiter &head_waiter)
+        : butler_(butler), head_waiter_(head_waiter),
           threadPool(thread_pool),
-          isRunning(false)
-    {
+          isRunning(false) {
     }
 
     /**
@@ -32,11 +38,11 @@ public:
     void start(size_t taskcout);
 
 
-
     void stop();
 
 private:
     Butler &butler_;
+    HeadWaiter &head_waiter_;
     ThreadPool &threadPool;
     std::atomic<bool> isRunning;
     mutex lock;

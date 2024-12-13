@@ -11,6 +11,7 @@
 #include <QPropertyAnimation>
 #include "../Observer/Observer.h"
 #include "../Models/CommonClass/classDeclaration/MobilityModel.h"
+#include "DinningRoom/classDeclaration/headWaiter.h"
 /**
  * @class MobileElementView
  */
@@ -21,8 +22,10 @@ public:
      * @param parent
      * @param abscice
      * @param ordered
+     * @param mobility_model
      */
-    explicit  MobileElementView(QGraphicsEllipseItem *parent = nullptr, int abscice=0, int ordered=0);
+    explicit  MobileElementView(QGraphicsEllipseItem *parent = nullptr, MobilityModel* mobility_model = nullptr);
+    explicit  MobileElementView(QGraphicsEllipseItem *parent, HeadWaiter* head_waiter);
 
     /**
      * @brief this function receive the different coordinate of the element
@@ -36,8 +39,8 @@ private:
 protected:
     void drawElement();
     void setElementPosition(int newX, int newY);
-    MobilityModel mobilityModel;
-    QTimer *time;
+    MobilityModel* mobilityModel;
+    HeadWaiter* head_waiter_;
 
 
 };

@@ -40,8 +40,7 @@ public:
           data(sharedData) {
     }
 
-    // Butler(): MotionlessElementModel(20, 20), clientNUmber(0), dinningRoom(dinningRoom) {
-    // };
+
 
 
     /**

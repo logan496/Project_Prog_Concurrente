@@ -31,7 +31,8 @@ std::pair<int, int> TableFactory::returnFixedPosition() {
     return coordinate;
 }
 
-int TableFactory::ManageCapacityOfTable() {
-    // TODO : une méthode pour gérer efficacement l'attribution des capacités
-    return 0;
+int TableFactory::ManageCapacityOfTable() const {
+    srand(time(nullptr));
+    const int indexToSend = rand() % 9;
+    return table_capacity[indexToSend];
 }

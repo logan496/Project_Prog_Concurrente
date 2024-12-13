@@ -4,7 +4,11 @@
 #include "MainView.h"
 
 
-MainWindow::MainWindow(MobileElementView *element_view, DinningRoom *dinning_room) : element_view_(element_view), dinning_room_(dinning_room) {
+#include <QTimer>  // Include this header for QTimer
+
+MainWindow::MainWindow(MobileElementView *element_view, DinningRoom *dinning_room)
+    : element_view_(element_view), dinning_room_(dinning_room) {
+
     scene = new QGraphicsScene();
     view = new QGraphicsView(scene);
 
@@ -12,15 +16,16 @@ MainWindow::MainWindow(MobileElementView *element_view, DinningRoom *dinning_roo
     const QPixmap fullSizeBackground = background.scaled(1920, 1080, Qt::IgnoreAspectRatio);
     view->setSceneRect(0, 0, 1920, 1080);
 
-    // scene->setBackgroundBrush(Qt::white);
-
     scene->addPixmap(fullSizeBackground);
     createTable();
-
     scene->addItem(element_view);
 
-    view->showMaximized();
+    // Delay table creation to avoid blocking the UI thread
+   // QTimer::singleShot(std::chrono::milliseconds(10), [this]() { createTable(); }); // Asynchronous call
+
+    view->show();
 }
+
 
 
 MainWindow::~MainWindow() {
@@ -38,6 +43,7 @@ void MainWindow::createTable() {
         tableItem->setPos(table.getAbscice(), table.getOrdinate());
         scene->addItem(tableItem);
     }
+    scene->update();
 }
 
 

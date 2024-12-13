@@ -11,13 +11,14 @@
 /**
  * @class MobilityModel
  */
-class MobilityModel : public Observable, public QObject {
+class MobilityModel : public QObject, public Observable {
+    Q_OBJECT
 public:
     explicit MobilityModel(QObject *parent = nullptr, int abscice = 0, int ordered = 0);
 
-    bool isAtDestionAbscice(int delatX) const;
+    bool isAtDestionAbscice(int targetX) const;
 
-    bool isAtDestinationIntercept(int delatY) const;
+    bool isAtDestinationIntercept(int targetY) const;
 
     int getAbscice() const;
 
